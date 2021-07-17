@@ -48,16 +48,18 @@ export const GameProvider = ({ ...props }) => {
     })
   }
 
-  const joinRoom = roomToJoin => {
+  const joinRoom = (roomToJoin, name) => {
     socket.emit("join-room", {
       room: roomToJoin,
+      name,
     })
   }
 
-  const createRoom = (category, map) => {
+  const createRoom = (category, map, name) => {
     socket.emit("create-room", {
       category,
       map,
+      name
     })
   }
 

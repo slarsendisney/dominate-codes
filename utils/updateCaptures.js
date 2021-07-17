@@ -30,7 +30,7 @@ function updateCaptures(dict, id, shape, dimensions, y, x) {
       }
       break;
     case "short_vertical_bar":
-      var upperLimit = Math.min(y + Math.floor(height / 2), height)
+      var upperLimit = Math.min(y + 4, height)
       for (var i = y; i < upperLimit; ++i){
         if (!dict[i]) {
           dict[i] = { [x]: id }

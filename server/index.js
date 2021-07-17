@@ -20,6 +20,7 @@ const express = require("express")
 var cors = require("cors")
 var whitelist = [
   "http://localhost:8000",
+  "http://localhost:9000",
   "https://dominate-fe.onrender.com",
   "http://dominate-fe.onrender.com",
   "http://dominate.codes",
