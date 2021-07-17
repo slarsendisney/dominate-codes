@@ -1,0 +1,46 @@
+{
+    "name": "gatsby-starter-hello-world",
+    "private": true,
+    "description": "A simplified bare-bones starter for Gatsby",
+    "version": "0.1.0",
+    "license": "0BSD",
+    "scripts": {
+        "build": "gatsby build",
+        "develop": "gatsby develop",
+        "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+        "start": "npm run develop",
+        "serve": "gatsby serve",
+        "clean": "gatsby clean",
+        "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    },
+    "dependencies": {
+        "@tailwindcss/typography": "^0.4.1",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "dotenv": "^8.6.0",
+        "express": "^4.17.1",
+        "firebase": "^8.7.1",
+        "firebase-admin": "^9.11.0",
+        "framer-motion": "^4.1.17",
+        "gatsby": "^3.9.0",
+        "gatsby-plugin-postcss": "^4.9.0",
+        "postcss": "^8.2.6",
+        "react": "^17.0.1",
+        "react-copy-to-clipboard": "^5.0.3",
+        "react-dom": "^17.0.1",
+        "socket.io-client": "^3.1.1",
+        "tailwindcss": "^2.2.4",
+        "tailwindcss-selection-variant": "^0.1.0",
+        "unique-names-generator": "^4.5.0"
+    },
+    "devDependencies": {
+        "prettier": "2.3.2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
+    },
+    "bugs": {
+        "url": "https://github.com/gatsbyjs/gatsby/issues"
+    }
+}
