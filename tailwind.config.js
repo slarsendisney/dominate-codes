@@ -7,6 +7,14 @@ module.exports = {
   },
   theme: {
     extend: {
+      scale: {
+        55: ".55",
+        60: ".6",
+        65: ".65",
+      },
+      screens: {
+        xs: "560px",
+      },
       typography: theme => ({
         unprose: {
           css: {
