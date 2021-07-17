@@ -53,9 +53,9 @@ const Game = ({ code }) => {
       )}
       <GameProgress />
       <GameMap activateEvent={activateEvent} />
-      <div className="absolute bottom-0 left-0 h-48 bg-gray-100 rounded m-2 p-2 overflow-y-scroll">
+      {/* <div className="absolute bottom-0 left-0 h-48 bg-gray-100 rounded m-2 p-2 overflow-y-scroll">
         {JSON.stringify(gameState, null, "\t")}
-      </div>
+      </div> */}
     </div>
   )
 }
