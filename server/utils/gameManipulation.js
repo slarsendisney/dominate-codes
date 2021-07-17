@@ -3,9 +3,9 @@ const questions = require("../data/questionBank.json")
 
 const maps = require("../map-data.json")
 const intialColors = [
-  { primary: "#F59E0B", light: "#FBBF24", dark: "#D97706" },
-  { primary: "#10B981", light: "#34D399", dark: "#059669" },
-  { primary: "#EC4899", light: "#F472B6", dark: "#DB2777" },
+  { primary: "#F59E0B", lighter: "#FEF3C7", light: "#FBBF24", dark: "#D97706" },
+  { primary: "#10B981", lighter: "#D1FAE5", light: "#34D399", dark: "#059669" },
+  { primary: "#EC4899", lighter: "#DBEAFE",light: "#F472B6", dark: "#DB2777" },
 ]
 
 async function roomSetup(roomId, category, map, socket, firebase) {
@@ -20,7 +20,7 @@ async function roomSetup(roomId, category, map, socket, firebase) {
         occupied: {},
         gameStart: false,
         gameEnd: false,
-        counter: 180,
+        counter: 5,
         owner: socket.id,
         colors: intialColors,
         players: [socket.id],
@@ -59,24 +59,35 @@ async function gameStart(roomId, firebase, io) {
     .doc(roomId)
     .get()
   const { dimensions, counter, players, omissions } = document.data()
+
+  // Create inclusions
+  const inclusions = []
+  for (var i = 0; i < dimensions.width; i++) {
+    for (var j = 0; j < dimensions.height; j++) {
+      if (!omissions?.[j]?.[i]) inclusions.push([i, j])
+    }
+  }
+
+  if (typeof inclusions === "undefined") return
+
   const events = [
     await generateEvent(
       roomId,
-      getRandomCoordinates(dimensions, omissions),
+      getRandomCoordinates(dimensions, inclusions),
       firebase,
       io,
       true
     ),
     await generateEvent(
       roomId,
-      getRandomCoordinates(dimensions, omissions),
+      getRandomCoordinates(dimensions, inclusions),
       firebase,
       io,
       true
     ),
     await generateEvent(
       roomId,
-      getRandomCoordinates(dimensions, omissions),
+      getRandomCoordinates(dimensions, inclusions),
       firebase,
       io,
       true
@@ -84,14 +95,16 @@ async function gameStart(roomId, firebase, io) {
   ]
   await firebase.firestore().collection("rooms").doc(roomId).set(
     {
-      gameStart: true,
       events,
+      occupied: {},
+      gameStart: true,
+      gameEnd:false,
     },
     { merge: true }
   )
   // generate intial events
   sendGameState(roomId, firebase, io)
-  gameLoop(roomId, firebase, io, dimensions, counter, players, omissions)
+  gameLoop(roomId, firebase, io, dimensions, counter, players, inclusions)
 }
 
 function checkPlayersPresent(roomId, players, io) {
@@ -148,14 +161,10 @@ function sendGameState(roomId, firebase, io) {
     .then(data => io.to(roomId).emit("gameState", data.data()))
 }
 
-function getRandomCoordinates(dimensions, omissions) {
-  let x = Math.ceil(Math.random() * dimensions.width - 1)
-  let y = Math.ceil(Math.random() * dimensions.height - 1)
-  while (omissions?.[x]?.[y]) {
-    x = Math.ceil(Math.random() * dimensions.width - 1)
-    y = Math.ceil(Math.random() * dimensions.height - 1)
-  }
-  return [x, y]
+function getRandomCoordinates(dimensions, inclusions) {
+  // console.log(inclusions)
+  const [x,y] =  inclusions[Math.floor(Math.random() * inclusions.length - 1)]
+  return [y,x]
 }
 
 async function endGame(roomId, firebase, io) {
@@ -168,7 +177,15 @@ async function endGame(roomId, firebase, io) {
   sendGameState(roomId, firebase, io)
 }
 
-async function gameLoop(roomId, firebase, io, dimensions, counter, players, omissions) {
+async function gameLoop(
+  roomId,
+  firebase,
+  io,
+  dimensions,
+  counter,
+  players,
+  inclusions
+) {
   let countdown = counter
   // await sendGameState(roomId, firebase, io)
   // at random time intervals add more
@@ -178,9 +195,16 @@ async function gameLoop(roomId, firebase, io, dimensions, counter, players, omis
       io.to(roomId).emit("counter", countdown)
       countdown--
 
+      if (typeof inclusions === "undefined") return 
+
       let rnd = Math.random()
-      if (rnd < 0.15) {
-        generateEvent(roomId, getRandomCoordinates(dimensions, omissions), firebase, io)
+      if (rnd < 0.5 && (typeof inclusions !== "undefined")) {
+        generateEvent(
+          roomId,
+          getRandomCoordinates(dimensions, inclusions),
+          firebase,
+          io
+        )
         sendGameState(roomId, firebase, io)
       }
 

@@ -13,7 +13,7 @@ function round(num, decimalPlaces = 2) {
   num = Math.round(num + "e" + decimalPlaces)
   return Number(num + "e" + -decimalPlaces)
 }
-const ProgressBar = ({ primaryColor, lightColor, progress }) => {
+const ProgressBar = ({ primaryColor, lighterColor, player, progress, ranking }) => {
   const transition = {
     duration: 0.5,
     type: "spring",
@@ -35,8 +35,8 @@ const ProgressBar = ({ primaryColor, lightColor, progress }) => {
   }
   return (
     <div
-      className="overflow-hidden h-8 mb-4 text-xs flex rounded w-full"
-      style={{ backgroundColor: lightColor }}
+      className="overflow-hidden h-5 mb-4 text-xs flex rounded w-full"
+      style={{ backgroundColor: lighterColor }}
     >
       <motion.div
         intial="enter"
@@ -44,10 +44,10 @@ const ProgressBar = ({ primaryColor, lightColor, progress }) => {
         transition={transition}
         animate="animate"
         custom={progress}
-        className="shadow-none h-8 flex flex-col text-center whitespace-nowrap text-white justify-center"
+        className="shadow-none h-5 flex flex-col text-center whitespace-nowrap text-white justify-center"
         style={{ backgroundColor: primaryColor }}
       >
-        <p className="font-bold">{round(progress, 1)}%</p>
+        <p className="pl-2 font-bold text-black">{`${ranking} - ${round(progress, 1)}% ${player}`}</p>
       </motion.div>
     </div>
   )

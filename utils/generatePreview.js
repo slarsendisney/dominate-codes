@@ -21,7 +21,7 @@ function generatePreview(shape, dimensions, y, x) {
       }
       break;
     case "short_horizontal_bar":
-      var upperLimit = Math.min(x + Math.floor(width / 2), width)
+      var upperLimit = Math.min(x + 4, width)
       for (var i = x; i < upperLimit; ++i){
         if (!dict[y]) {
           dict[y] = { [i]: true }
@@ -31,7 +31,7 @@ function generatePreview(shape, dimensions, y, x) {
       }
       break;
     case "short_vertical_bar":
-      var upperLimit = Math.min(y + Math.floor(height / 2), height)
+      var upperLimit = Math.min(y + 4, height)
       for (var i = y; i < upperLimit; ++i){
         if (!dict[i]) {
           dict[i] = { [x]: true }

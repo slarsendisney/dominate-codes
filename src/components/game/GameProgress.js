@@ -1,8 +1,9 @@
 import * as React from "react"
 import { useGame } from "../../context/game-context"
 import ProgressBar from "./ProgressBar"
+import Clock from "../../assets/Clock"
 
-function getProgress(occupied, dimensions, players) {
+function getProgress(occupied, possibleCaptureCount, players) {
   const intial = {}
   players.forEach(id => (intial[id] = { count: 0 }))
   const playerProgress = Object.keys(occupied).reduce((acc, x) => {
@@ -20,37 +21,77 @@ function getProgress(occupied, dimensions, players) {
       ...playerProgress[key],
       progress:
         (playerProgress[key].count * 100) /
-        (dimensions.width * dimensions.height),
+        possibleCaptureCount,
     }
   })
 
   return playerProgress
 }
 
+function compare(a, b) {
+  const progressA = a.progress;
+  const progressB = b.progress;
+
+  let comparison = 0;
+  if (progressA < progressB) {
+    comparison = 1;
+  } else if (progressA > progressB) {
+    comparison = -1;
+  }
+  return comparison;
+}
+
+function getCountdownTime(countdown) {
+  if(typeof countdown === "string") {
+    return "--:--"
+  }
+
+  var minutes = parseInt(countdown / 60, 10);
+  var seconds = parseInt(countdown % 60, 10);
+
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+
+  return minutes + ":" + seconds;
+}
+
 const GameProgress = () => {
-  const { countdown, players, colors, dimensions, occupied } = useGame()
+  const { countdown, players, colors, dimensions, possibleCaptureCount, occupied } = useGame()
+
+  const countdownTime = getCountdownTime(countdown)
 
   const progress = React.useMemo(
-    () => getProgress(occupied, dimensions, players),
+    () => getProgress(occupied, possibleCaptureCount, players),
     [occupied, dimensions, players]
   )
+
+  let playersWithColors = React.useMemo(()=> {
+    return players.reduce((acc, cur, i) => {
+      acc.push({uid:cur, ...colors[i], ...progress[cur]})
+      return acc
+    }, []).sort(compare)
+  }, [colors, players])
 
   if (!colors) {
     return <></>
   }
 
   return (
-    <div className="absolute top-0 left-0 w-full mt-4">
-      <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-4">
-          <p className="text-2xl font-bold">{countdown}</p>
+    <div className="w-full relative">
+      <div className="absolute inset-y-0 left-0">
+        <div className="flex item-center m-4 space-x-1">
+          <Clock className="m-auto w-6 h-6"/><p className="text-2xl font-bold">{countdownTime}</p>
         </div>
+      </div>
+      <div className="absolute inset-y-0 right-0 w-64 mt-4 mr-4">
         <div className="align-right flex flex-col space-y-1 items-center">
-          {players.map((player, i) => (
+          {playersWithColors.map((player, i) => (
             <ProgressBar
-              primaryColor={colors[i].primary}
-              lightColor={colors[i].light}
-              progress={progress[player].progress}
+              primaryColor={player.primary}
+              lighterColor={player.lighter}
+              player={player.uid}
+              progress={player.progress}
+              ranking={i+1}
             />
           ))}
         </div>

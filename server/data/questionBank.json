@@ -2,7 +2,7 @@
   {
     "id": "12345678",
     "type": "mcq",
-    "shape": "short_horizontal_bar",
+    "shape": "large_square",
     "question": "What is the best programming language for everything?",
     "caption": "Questions could sometimes have an additional subcaption",
     "options": ["JavaScript", "Python", "Java", "Haskell"],
@@ -12,7 +12,7 @@
   {
     "id": "22345678",
     "type": "mcq",
-    "shape": "short_horizontal_bar",
+    "shape": "horizontal_bar",
     "question": "What is the best programming language for everything?",
     "caption": "Questions could sometimes have an additional subcaption",
     "options": ["JavaScript", "Python", "Java", "Haskell"],
@@ -22,7 +22,7 @@
   {
     "id": "32345678",
     "type": "mcq",
-    "shape": "short_horizontal_bar",
+    "shape": "vertical_bar",
     "question": "What is the best programming language for everything?",
     "caption": "Questions could sometimes have an additional subcaption",
     "options": ["JavaScript", "Python", "Java", "Haskell"],
@@ -42,7 +42,7 @@
   {
     "id": "52345678",
     "type": "mcq",
-    "shape": "short_horizontal_bar",
+    "shape": "short_vertical_bar",
     "question": "What is the best programming language for everything?",
     "caption": "Questions could sometimes have an additional subcaption",
     "options": ["JavaScript", "Python", "Java", "Haskell"],
@@ -52,7 +52,7 @@
   {
     "id": "62345678",
     "type": "mcq",
-    "shape": "short_horizontal_bar",
+    "shape": "large_square",
     "question": "What is the best programming language for everything?",
     "caption": "Questions could sometimes have an additional subcaption",
     "options": ["JavaScript", "Python", "Java", "Haskell"],
@@ -62,7 +62,7 @@
   {
     "id": "72345678",
     "type": "mcq",
-    "shape": "short_horizontal_bar",
+    "shape": "left_boot",
     "question": "What is the best programming language for everything?",
     "caption": "Questions could sometimes have an additional subcaption",
     "options": ["JavaScript", "Python", "Java", "Haskell"],
@@ -72,7 +72,7 @@
   {
     "id": "82345678",
     "type": "mcq",
-    "shape": "short_horizontal_bar",
+    "shape": "left_boot",
     "question": "What is the best programming language for everything?",
     "caption": "Questions could sometimes have an additional subcaption",
     "options": ["JavaScript", "Python", "Java", "Haskell"],
@@ -82,7 +82,7 @@
   {
     "id": "92345678",
     "type": "mcq",
-    "shape": "short_horizontal_bar",
+    "shape": "large_square",
     "question": "What is the best programming language for everything?",
     "caption": "Questions could sometimes have an additional subcaption",
     "options": ["JavaScript", "Python", "Java", "Haskell"],

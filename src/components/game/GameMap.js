@@ -2,6 +2,14 @@ import React, { useRef, useEffect, useState, useMemo } from "react"
 import { m as motion, useAnimation } from "framer-motion"
 import { useGame } from "../../context/game-context"
 import generatePreview from "../../../utils/generatePreview"
+
+import horizontal_bar from "../../assets/horizontal_bar.svg"
+import large_square from "../../assets/large_square.svg"
+import vertical_bar from "../../assets/vertical_bar.svg"
+import left_boot from "../../assets/left_boot.svg"
+import short_horizontal_bar from "../../assets/short_horizontal_bar.svg"
+import short_vertical_bar from "../../assets/short_vertical_bar.svg"
+
 const circleSize = "h-4 w-4 md:h-6 md:w-6"
 
 const itemVariants = {
@@ -17,11 +25,15 @@ const itemVariants = {
   event: {
     opacity: [0.5, 1],
     scale: [1, 1.05, 1.05, 1.05, 1.05, 1],
-    backgroundColor: "#7C3AED",
+    backgroundColor: "#A78BFA",
   },
   preview: {
     opacity: 1,
     backgroundColor: "#C4B5FD",
+  },
+  timedOut: {
+    opacity: 1,
+    backgroundColor: "#F87171",
   },
 }
 
@@ -58,6 +70,7 @@ const GameMap = ({ delayPerPixel = 0.0008, activateEvent }) => {
     socketID,
     colors,
     omissions,
+    timedOut,
   } = useGame()
   const [eventPreview, setEventPreview] = useState()
   const grid = createGrid(width, height)
@@ -112,6 +125,7 @@ const GameMap = ({ delayPerPixel = 0.0008, activateEvent }) => {
                   <GridItem
                     key={`row_${y}`}
                     i={y}
+                    timedOut={timedOut?.[y]?.[x]}
                     socketID={socketID}
                     variants={variants}
                     originIndex={40}
@@ -134,6 +148,25 @@ const GameMap = ({ delayPerPixel = 0.0008, activateEvent }) => {
   )
 }
 
+const Shape = ({ shape }) => {
+  switch (shape) {
+    case "horizontal_bar":
+      return <img className="h-full mx-auto" src={horizontal_bar} />
+    case "vertical_bar":
+      return <img className="h-full mx-auto" src={vertical_bar} />
+    case "large_square":
+      return <img className="h-full mx-auto" src={large_square} />
+    case "left_boot":
+      return <img className="h-full mx-auto" src={left_boot} />
+    case "short_horizontal_bar":
+      return <img className="h-full mx-auto" src={short_horizontal_bar} />
+    case "short_vertical_bar":
+      return <img className="h-full mx-auto" src={short_vertical_bar} />
+    default:
+      return <div />
+  }
+}
+
 const GridItem = ({
   event,
   activateEvent,
@@ -142,16 +175,19 @@ const GridItem = ({
   occupied,
   variants,
   socketID,
+  timedOut,
 }) => {
   const [active, setActive] = useState(false)
   return (
     <>
       {event && event.progress !== "complete" ? (
         <motion.button
-          onClick={() => activateEvent(event)}
+          onClick={() => !timedOut && activateEvent(event)}
           onHoverStart={() => {
-            setActive(true)
-            setEventPreview(event)
+            if (!timedOut) {
+              setActive(true)
+              setEventPreview(event)
+            }
           }}
           onHoverEnd={() => {
             setActive(false)
@@ -160,13 +196,25 @@ const GridItem = ({
           // whileHover={{ scale: 1.1, backgroundColor: "#8B5CF6" }}
           className={`${circleSize} rounded-full`}
           initial="hidden"
-          animate={active ? `${socketID}-dark` : "event"}
+          animate={
+            timedOut ? "timedOut" : active ? `${socketID}-dark` : "event"
+          }
           variants={variants}
           transition={{
             ease: "linear",
-            duration: active ? 0.1 : 1,
+            duration: active || timedOut ? 0.1 : 1,
           }}
-        ></motion.button>
+        >
+          {timedOut ? (
+            <p className="font-bold" style={{ fontSize: 14 }}>
+              {timedOut}
+            </p>
+          ) : (
+            <div className="h-3 w-3 m-auto">
+              <Shape shape={event.shape} />
+            </div>
+          )}
+        </motion.button>
       ) : (
         <motion.div
           className={`${circleSize} rounded-full`}
