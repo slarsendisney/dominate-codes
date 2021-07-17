@@ -7,7 +7,7 @@ import { m as motion } from "framer-motion"
 
 const QuestionContainer = ({ activeEvent, reset }) => {
   const {
-    question: { question, id, type, options, answer },
+    question: { question, id, type, params : { options, answer} },
     position,
   } = activeEvent
   const { submitVictory, submitPenalty, currentPlayerColor, addTimeout } = useGame()
