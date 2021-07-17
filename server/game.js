@@ -8,9 +8,9 @@ const {
 const { createRoomName } = require("./utils/roomNameGen")
 
 module.exports = function (socket, io, firebase) {
-  socket.on("create-room", async () => {
+  socket.on("create-room", async ({category, map}) => {
     const newRoom = createRoomName()
-    await roomSetup(newRoom, socket, firebase)
+    await roomSetup(newRoom, category, map, socket, firebase)
     socket.join(newRoom)
     socket.emit("join-room", {
       room: newRoom,

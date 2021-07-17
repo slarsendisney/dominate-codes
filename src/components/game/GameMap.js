@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState, useMemo } from "react"
 import { m as motion, useAnimation } from "framer-motion"
 import { useGame } from "../../context/game-context"
 import generatePreview from "../../../utils/generatePreview"
-const circleSize = "h-6 w-6 md:h-8 md:w-8"
+const circleSize = "h-4 w-4 md:h-6 md:w-6"
 
 const itemVariants = {
   visible: {
@@ -25,7 +25,7 @@ const itemVariants = {
   },
 }
 
-function fullVariants(players, colors){
+function fullVariants(players, colors) {
   let variants = itemVariants
   players.forEach((player, i) => {
     variants[player] = {
@@ -44,7 +44,7 @@ function fullVariants(players, colors){
   return variants
 }
 
-function createGrid(width, height) {
+export function createGrid(width, height) {
   let filledGrid = new Array(height).fill(new Array(width).fill(true))
   return filledGrid
 }
@@ -54,9 +54,10 @@ const GameMap = ({ delayPerPixel = 0.0008, activateEvent }) => {
     dimensions: { width, height },
     events,
     occupied,
-    players, 
+    players,
     socketID,
-    colors
+    colors,
+    omissions,
   } = useGame()
   const [eventPreview, setEventPreview] = useState()
   const grid = createGrid(width, height)
@@ -89,38 +90,42 @@ const GameMap = ({ delayPerPixel = 0.0008, activateEvent }) => {
     return {}
   }, [eventPreview])
   const variants = fullVariants(players, colors)
-  console.log({variants, players, socketID})
+  console.log({ variants, players, socketID })
   return (
     <div className="h-screen w-full flex items-center justify-center">
       <div
         initial="hidden"
         animate={controls}
-        className="flex flex-col space-y-2"
+        className="flex flex-col space-y-1 md:space-y-2"
       >
         {grid.map((columns, x) => (
           <motion.div
             key={`column_${x}`}
             initial="hidden"
             animate={controls}
-            className="flex space-x-2"
+            className="flex space-x-1 md:space-x-2"
           >
             {columns.map((_, y) => (
               <>
-                <GridItem
-                  key={`row_${y}`}
-                  i={y}
-                  socketID={socketID}
-                  variants={variants}
-                  originIndex={40}
-                  delayPerPixel={delayPerPixel}
-                  originOffset={originOffset}
-                  event={eventsDict?.[x]?.[y]}
-                  preview={previewDict?.[x]?.[y]}
-                  occupied={occupied?.[x]?.[y]}
-                  activateEvent={activateEvent}
-                  socketID={socketID}
-                  setEventPreview={setEventPreview}
-                />
+                {omissions?.[x]?.[y] ? (
+                  <div className={`${circleSize}`} />
+                ) : (
+                  <GridItem
+                    key={`row_${y}`}
+                    i={y}
+                    socketID={socketID}
+                    variants={variants}
+                    originIndex={40}
+                    delayPerPixel={delayPerPixel}
+                    originOffset={originOffset}
+                    event={eventsDict?.[x]?.[y]}
+                    preview={previewDict?.[x]?.[y]}
+                    occupied={occupied?.[x]?.[y]}
+                    activateEvent={activateEvent}
+                    socketID={socketID}
+                    setEventPreview={setEventPreview}
+                  />
+                )}
               </>
             ))}
           </motion.div>
@@ -137,7 +142,7 @@ const GridItem = ({
   preview,
   occupied,
   variants,
-  socketID
+  socketID,
 }) => {
   const [active, setActive] = useState(false)
   return (
@@ -167,7 +172,9 @@ const GridItem = ({
         <motion.div
           className={`${circleSize} rounded-full`}
           initial="hidden"
-          animate={preview ? `${socketID}-light` : occupied ? `${occupied}` : "visible"}
+          animate={
+            preview ? `${socketID}-light` : occupied ? `${occupied}` : "visible"
+          }
           variants={variants}
           transition={{
             ease: "linear",

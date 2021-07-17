@@ -22,9 +22,10 @@ export const GameProvider = ({ ...props }) => {
     })
   }
 
-  const createRoom = () => {
+  const createRoom = (category, map) => {
     socket.emit("create-room", {
-      room,
+      category,
+      map,
     })
   }
 
@@ -70,7 +71,8 @@ export const GameProvider = ({ ...props }) => {
     counter,
     owner,
     players,
-    colors
+    colors,
+    omissions
   } = gameState || {}
 
   return (
@@ -92,6 +94,7 @@ export const GameProvider = ({ ...props }) => {
         owner,
         players,
         socketID: socket.id,
+        omissions,
         submitVictory,
         submitPenalty,
         colors

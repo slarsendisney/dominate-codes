@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { useGame } from "../../context/game-context"
 
-const Join = ({ code }) => {
+const Join = ({ code, createTime }) => {
   const [roomId, setRoomId] = useState()
-  const { createRoom, joinRoom } = useGame()
+  const { joinRoom } = useGame()
   useEffect(() => {
     if (code) {
       joinRoom(code)
@@ -33,7 +33,7 @@ const Join = ({ code }) => {
             </div>
           </div>
           <div>
-            <button className="primary-btn rounded w-full" onClick={createRoom}>
+            <button className="primary-btn rounded w-full" onClick={createTime}>
               Create a Game
             </button>
           </div>
