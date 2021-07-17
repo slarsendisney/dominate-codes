@@ -4,21 +4,29 @@ import { m as motion } from "framer-motion"
 
 import MCQ from "../questions/MCQ"
 import TrueFalse from "../questions/TrueFalse"
-import GoodBadCodeBlocks from "../questions/GoodBadCodeBlocks"
 import FillTheBlank from "../questions/FillTheBlank"
-import DragAndDrop from "../questions/DragAndDrop"
 
 import VictoryCard from "../cards/VictoryCard"
 import DefeatCard from "../cards/DefeatCard"
+import { useTime } from "../../context/time-context"
 
 const QuestionContainer = ({ activeEvent, reset }) => {
   const {
-    question: { question, id, type, params : { options, answer} },
+    question: { question, id, type: eventType, params},
     position,
   } = activeEvent
-  const { submitVictory, submitPenalty, currentPlayerColor, addTimeout } = useGame()
+  console.log(activeEvent)
+  const {answer} = params
+  const { submitVictory, submitPenalty, currentPlayerColor } = useGame()
+  const {addTimeout} = useTime()
   const [timeStart, setTimeStart] = useState()
+  const [questionComponent, setQuestionComponent] = useState()
   const [state, setState] = useState("unanswered")
+
+  React.useLayoutEffect(() => {
+    setQuestionComponent(<QuestionComponent />)
+  }, [])
+
   const variants = {
     unanswered: {
       backgroundColor: "#fff",
@@ -36,7 +44,6 @@ const QuestionContainer = ({ activeEvent, reset }) => {
   React.useEffect(() => {
     setTimeStart(new Date())
   }, [])
-
   const onSubmit = result => {
     const timeStop = new Date()
     if (result === answer) {
@@ -55,9 +62,10 @@ const QuestionContainer = ({ activeEvent, reset }) => {
     }
   }
 
-  const QuestionComponent = (eventType) => {
+  function QuestionComponent() {
     switch(eventType) {
       case "MCQ":
+        const {options, answer} = params
         return (
           <MCQ 
             question={question}
@@ -67,21 +75,14 @@ const QuestionContainer = ({ activeEvent, reset }) => {
         )
       case "FillTheBlank":
         console.log("received filltheblank")
-        return <FillTheBlank question={question} />
-      case "GoodBadCodeBlocks":
-        console.log("received GoodBadCodeBlocks")
-        return <GoodBadCodeBlocks />
+        return <FillTheBlank question={question} onSubmit={onSubmit} {...params}/>      
       case "TrueFalse":
         console.log("received TrueFalse")
-        return <TrueFalse />
-      case "DragAndDrop":
-        console.log("received DragAndDrop")
-        return <DragAndDrop />
+        return <TrueFalse question={question} onSubmit={onSubmit} />
       default: 
         console.error("Did not receive a valid event type.")
     }
   }
-
 
   return (
     <div
@@ -119,10 +120,10 @@ const QuestionContainer = ({ activeEvent, reset }) => {
               <DefeatCard />
             ) : (
               <>
-                <div className="absolute z-30 bottom-0 left-0 -mb-3">
+                <div className="absolute z-30 bottom-0 left-0 -mb-5">
                   <button
                     onClick={reset}
-                    className="rounded-full px-2 py-1  bg-white border-indigo-600 border-4 -mb-8 mx-4"
+                    className="rounded-full px-2 py-1 bg-white border-indigo-600 border-4 -mb-10 mx-4"
                   >
                     <div className="flex items-center space-x-2">
                       <svg
@@ -141,8 +142,8 @@ const QuestionContainer = ({ activeEvent, reset }) => {
                       </svg>
                     </div>
                   </button>
-                  {QuestionComponent(eventType)}
                 </div>                
+                {questionComponent}
               </>
             )}
           </div>

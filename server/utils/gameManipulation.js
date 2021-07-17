@@ -20,7 +20,7 @@ async function roomSetup(roomId, name, category, map, socket, firebase) {
         occupied: {},
         gameStart: false,
         gameEnd: false,
-        counter: 180,
+        counter: 30,
         owner: socket.id,
         colors: intialColors,
         players: [{ socket: socket.id, name }],
@@ -171,14 +171,57 @@ function getRandomCoordinates(dimensions, inclusions) {
   return [y, x]
 }
 
-async function endGame(roomId, firebase, io) {
+async function endGame(roomId, players, firebase, io) {
+  const document = await firebase
+    .firestore()
+    .collection("rooms")
+    .doc(roomId)
+    .get()
+  
+  const { occupied, dimensions } = document.data()
+  const playerProgress = Object.keys(occupied).reduce((acc, x) => {
+    Object.keys(occupied[x]).map(y => {
+      const user = occupied[x][y]
+      if (acc[user]) {
+        acc[user].count += 1
+      }
+      else {
+        acc[user] = {
+          count: 1
+      }
+    }
+    })
+    return acc
+  }, {})
+  Object.keys(playerProgress).map(key => {
+    playerProgress[key].name = players.find(({socket}) => socket === key).name
+  })
+  const winningOrder = Object.keys(playerProgress).sort((a,b) => playerProgress[b].count - playerProgress[a].count)
+  const [winner, ...rest] = winningOrder
   await firebase.firestore().collection("rooms").doc(roomId).set(
     {
       gameEnd: true,
+      winner: playerProgress[winner].name,
     },
     { merge: true }
   )
   sendGameState(roomId, firebase, io)
+  await firebase.firestore().collection("leaderboard").doc(playerProgress[winner].name).set(
+    {
+      user: playerProgress[winner].name,
+      score: firebase.firestore.FieldValue.increment(500)
+    },
+    { merge: true }
+  )
+  for (user in rest){
+    await firebase.firestore().collection("leaderboard").doc(playerProgress[user].name).set(
+      {
+        user: playerProgress[user].name,
+        score: firebase.firestore.FieldValue.increment(200)
+      },
+      { merge: true }
+    )
+  }
 }
 
 async function gameLoop(
@@ -213,7 +256,7 @@ async function gameLoop(
       }
 
       if (countdown === 0) {
-        endGame(roomId, firebase, io)
+        endGame(roomId, players, firebase, io)
         clearInterval(WinnerCountdown)
       }
     } else {

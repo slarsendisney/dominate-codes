@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState, useMemo } from "react"
 import { m as motion, useAnimation } from "framer-motion"
 import { useGame } from "../../context/game-context"
+import { useTime } from "../../context/time-context"
 import generatePreview from "../../../utils/generatePreview"
 
 import horizontal_bar from "../../assets/horizontal_bar.svg"
@@ -69,9 +70,9 @@ const GameMap = ({ delayPerPixel = 0.0008, activateEvent }) => {
     players,
     socketID,
     colors,
-    omissions,
-    timedOut,
+    omissions
   } = useGame()
+  const { timedOut } = useTime()
   const [eventPreview, setEventPreview] = useState()
   const grid = createGrid(width, height)
   const originOffset = useRef({ top: 0, left: 0 })

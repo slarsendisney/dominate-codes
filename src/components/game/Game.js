@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useCallback } from "react"
 import { useGame } from "../../context/game-context"
 import GameMap from "./GameMap"
 import GameProgress from "./GameProgress"
@@ -21,6 +21,22 @@ const Game = ({ code }) => {
     }
     setEvent(false)
   }, [gameStart])
+
+  const resetQuestionContainer = useCallback(
+    () => {
+      setEvent(false)
+    },
+    [],
+  ) 
+
+  const activateEvent = useCallback((activeEvent) => {
+      setEvent(activeEvent)
+  }, []) 
+
+
+  useEffect(() => {
+    console.log({event, resetQuestionContainer})
+  }, [event, resetQuestionContainer])
 
   if (create) {
     return (
@@ -71,14 +87,6 @@ const Game = ({ code }) => {
     return <GameOver />
   }
 
-  const activateEvent = activeEvent => {
-    setEvent(activeEvent)
-  }
-
-  const resetQuestionContainer = () => {
-    setEvent(false)
-  }
-
   return (
     <>
     <div className="xs:hidden absolute top-0 z-30 left-0 w-full h-screen bg-white text-gray-800 flex flex-col space-y-6 items-center justify-center">
@@ -86,7 +94,6 @@ const Game = ({ code }) => {
         <p>Please rotate your device.</p>
       </div>
     <div className="relative w-full">
-      
       {event && (
         <QuestionContainer activeEvent={event} reset={resetQuestionContainer} />
       )}

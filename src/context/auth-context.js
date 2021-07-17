@@ -16,8 +16,9 @@ export const AuthProvider = ({ ...props }) => {
   const logout = () => {
       setUser({})
   }
+  console.log(user)
 
-  const name = user.name || user.displayName || "Uknown."
+  const name = user.name || user.displayName || "Unknown."
 
   return <AuthContext.Provider value={{ user, isLoggedIn, logout, name}} {...props} />
 }
