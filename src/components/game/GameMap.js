@@ -39,16 +39,16 @@ const itemVariants = {
 
 function fullVariants(players, colors) {
   let variants = itemVariants
-  players.forEach((player, i) => {
-    variants[player] = {
+  players.forEach(({socket}, i) => {
+    variants[socket] = {
       opacity: 1,
       backgroundColor: colors[i].primary,
     }
-    variants[`${player}-light`] = {
+    variants[`${socket}-light`] = {
       opacity: 1,
       backgroundColor: colors[i].light,
     }
-    variants[`${player}-dark`] = {
+    variants[`${socket}-dark`] = {
       opacity: 1,
       backgroundColor: colors[i].dark,
     }

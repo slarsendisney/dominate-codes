@@ -51,9 +51,9 @@ const Lobby = () => {
               </p>
               <div className="flex flex-col space-y-2">
                 {players &&
-                  players.map((playerID, i) => (
-                    <div key={playerID}>
-                      <PlayerItem playerID={playerID} index={i} />
+                  players.map(({name}, i) => (
+                    <div key={name}>
+                      <PlayerItem playerID={name} index={i} />
                     </div>
                   ))}
               </div>
@@ -71,9 +71,10 @@ const Lobby = () => {
               </p>
               <div className="flex flex-col space-y-2">
                 {players &&
-                  players.map((playerID, i) => (
-                    <PlayerItem playerID={playerID} index={i} />
-                  ))}
+                  players.map(({name}, i) => (
+                    <div key={name}>
+                      <PlayerItem playerID={name} index={i} />
+                    </div>))}
               </div>
               <div className="primary-btn rounded w-full flex items-center justify-center space-x-2">
                 <svg
