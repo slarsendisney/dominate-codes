@@ -1,18 +1,32 @@
 import React, { useState } from "react"
 import { useGame } from "../../context/game-context"
 import { m as motion } from "framer-motion"
-// will receive question
-// Question object
-// switch case based on question type
+
+import MCQ from "../questions/MCQ"
+import TrueFalse from "../questions/TrueFalse"
+import FillTheBlank from "../questions/FillTheBlank"
+
+import VictoryCard from "../cards/VictoryCard"
+import DefeatCard from "../cards/DefeatCard"
+import { useTime } from "../../context/time-context"
 
 const QuestionContainer = ({ activeEvent, reset }) => {
   const {
-    question: { question, id, type, params : { options, answer} },
+    question: { question, id, type: eventType, params},
     position,
   } = activeEvent
-  const { submitVictory, submitPenalty, currentPlayerColor, addTimeout } = useGame()
+  console.log(activeEvent)
+  const {answer} = params
+  const { submitVictory, submitPenalty, currentPlayerColor } = useGame()
+  const {addTimeout} = useTime()
   const [timeStart, setTimeStart] = useState()
+  const [questionComponent, setQuestionComponent] = useState()
   const [state, setState] = useState("unanswered")
+
+  React.useLayoutEffect(() => {
+    setQuestionComponent(<QuestionComponent />)
+  }, [])
+
   const variants = {
     unanswered: {
       backgroundColor: "#fff",
@@ -30,7 +44,6 @@ const QuestionContainer = ({ activeEvent, reset }) => {
   React.useEffect(() => {
     setTimeStart(new Date())
   }, [])
-
   const onSubmit = result => {
     const timeStop = new Date()
     if (result === answer) {
@@ -46,6 +59,28 @@ const QuestionContainer = ({ activeEvent, reset }) => {
         addTimeout(...position)
       }, 400)
       setTimeout(() => submitPenalty(id, timeStart, timeStop, position), 500)
+    }
+  }
+
+  function QuestionComponent() {
+    switch(eventType) {
+      case "MCQ":
+        const {options, answer} = params
+        return (
+          <MCQ 
+            question={question}
+            options={options}
+            onSubmit={onSubmit}
+          />
+        )
+      case "FillTheBlank":
+        console.log("received filltheblank")
+        return <FillTheBlank question={question} onSubmit={onSubmit} {...params}/>      
+      case "TrueFalse":
+        console.log("received TrueFalse")
+        return <TrueFalse question={question} onSubmit={onSubmit} />
+      default: 
+        console.error("Did not receive a valid event type.")
     }
   }
 
@@ -80,45 +115,15 @@ const QuestionContainer = ({ activeEvent, reset }) => {
         >
           <div className="relative px-4 pt-5 pb-6 sm:p-6 sm:pb-4">
             {state === "VICTORY" ? (
-              <div className="flex flex-col pb-2 text-center text-white">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-32 w-32 m-auto"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
+              <VictoryCard />
             ) : state === "DEFEAT" ? (
-              <div className="flex flex-col pb-2 text-white">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-32 w-32 m-auto"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
+              <DefeatCard />
             ) : (
               <>
-                <div className="absolute z-30 bottom-0 left-0 -mb-3">
+                <div className="absolute z-30 bottom-0 left-0 -mb-5">
                   <button
                     onClick={reset}
-                    className="rounded-full px-2 py-1  bg-white border-indigo-600 border-4 -mb-8 mx-4"
+                    className="rounded-full px-2 py-1 bg-white border-indigo-600 border-4 -mb-10 mx-4"
                   >
                     <div className="flex items-center space-x-2">
                       <svg
@@ -137,24 +142,8 @@ const QuestionContainer = ({ activeEvent, reset }) => {
                       </svg>
                     </div>
                   </button>
-                </div>
-                <div className="flex flex-col pb-2">
-                  <h2 className="text-2xl font-bold mb-2">{question}</h2>
-                  <ul>
-                    {options.map(option => {
-                      return (
-                        <li key={option}>
-                          <button
-                            className="w-full bg-indigo-100 hover:bg-indigo-200 p-2 border-2 border-indigo-800 rounded-md mb-2 cursor"
-                            onClick={() => onSubmit(option)}
-                          >
-                            {option}
-                          </button>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                </div>
+                </div>                
+                {questionComponent}
               </>
             )}
           </div>

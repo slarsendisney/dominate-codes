@@ -10,38 +10,8 @@ export const GameProvider = ({ ...props }) => {
   const [gameState, setGameState] = useState()
   const [countdown, setCountdown] = useState("...")
   const [disconnected, setDisconnected] = useState(false)
-  const [timedOut, setTimedOut] = useState({})
   const [room, setRoom] = useState()
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      const newTimedOut = { ...timedOut }
-      Object.keys(newTimedOut).forEach(y => {
-        Object.keys(newTimedOut[y]).forEach(x => {
-          if (newTimedOut[y][x] > 0) {
-            newTimedOut[y][x] = newTimedOut[y][x] - 1
-          } else {
-            delete newTimedOut[y][x]
-          }
-        })
-      })
-      setTimedOut(newTimedOut)
-    }, 1000)
-    return () => clearInterval(intervalId)
-  }, [timedOut])
-
-  const addTimeout = (x, y) => {
-    const newTimedOut = { ...timedOut }
-    if (newTimedOut[y]) {
-      newTimedOut[y][x] = 9
-    } else {
-      newTimedOut[y] = {
-        [x]: 9,
-      }
-    }
-    console.log(newTimedOut)
-    setTimedOut(newTimedOut)
-  }
   const startGame = () => {
     socket.emit("game-start", {
       room,
@@ -121,6 +91,7 @@ export const GameProvider = ({ ...props }) => {
     players,
     colors,
     omissions,
+    winner,
   } = gameState || {}
 
   const currentPlayerColor = useMemo(() => {
@@ -172,10 +143,9 @@ export const GameProvider = ({ ...props }) => {
         submitPenalty,
         colors,
         currentPlayerColor,
-        addTimeout,
-        timedOut,
         resetGameState,
-        disconnected
+        disconnected,
+        winner
       }}
       {...props}
     />

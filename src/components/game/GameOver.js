@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
 import { useGame } from "../../context/game-context"
+import FinalProgress from "./FinalProgress"
 
 const GameOver = () => {
   const {
@@ -11,6 +12,7 @@ const GameOver = () => {
     socketID,
     owner,
     resetGameState,
+    winner
   } = useGame()
 
   return (
@@ -21,7 +23,11 @@ const GameOver = () => {
             <p className="text-sm text-center uppercase text-gray-400">
               Time's Up!
             </p>
-            <p className="text-2xl text-center font-bold">Username Wins!</p>
+            <p className="text-2xl text-center font-bold">{winner} wins!</p>
+          </div>
+          <div className="w-80">
+            <h4>Summary:</h4>
+            <FinalProgress />
           </div>
           <div className="grid grid-cols-2 gap-2">
             <button

@@ -1,7 +1,7 @@
-[
+[ 
   {
     "id": "00000001",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "large_square",
     "question": "What does HTML stands for?",
     "tags": ["General Knowledge", "HTML", "Web Development"],
@@ -12,7 +12,7 @@
   },
   {
     "id": "00000002",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "large_square",
     "question": "Which of the following initializes the document type in HTML5?",
     "tags": ["General Knowledge", "HTML", "Web Development"],
@@ -23,7 +23,7 @@
   },
   {
     "id": "00000003",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "large_square",
     "question": "Which of the following HTML tags is used to make text bold?",
     "tags": ["General Knowledge", "HTML", "Web Development"],
@@ -34,7 +34,7 @@
   },
   {
     "id": "00000004",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "vertical_bar",
     "question": "Which of the following HTML tags is used to make text italic?",
     "tags": ["General Knowledge", "HTML", "Web Development"],
@@ -45,7 +45,7 @@
   },
   {
     "id": "00000005",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "large_square",
     "question": "Which of the following HTML tags is used to make an unordered list?",
     "tags": ["General Knowledge", "HTML", "Web Development"],
@@ -56,7 +56,7 @@
   },
   {
     "id": "00000006",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "large_square",
     "question": "Which of the following HTML tags is used to make an ordered list?",
     "tags": ["General Knowledge", "HTML", "Web Development"],
@@ -67,7 +67,7 @@
   },
   {
     "id": "00000007",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "vertical_bar",
     "question": "Which of the following characters is used in a closing HTML tag?",
     "tags": ["General Knowledge", "HTML", "Web Development"],
@@ -78,7 +78,7 @@
   },
   {
     "id": "00000008",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "large_square",
     "question": "What is the font-size of the <h1> heading tag?",
     "tags": ["HTML", "Web Development"],
@@ -89,7 +89,7 @@
   },
   {
     "id": "00000009",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "vertical_bar",
     "question": "How many heading tags are there in HTML5?",
     "tags": ["HTML", "Web Development"],
@@ -100,7 +100,7 @@
   },
   {
     "id": "00000010",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "horizontal_bar",
     "question": "Which of the following attributes is used to add link to any element?",
     "tags": ["HTML", "Web Development"],
@@ -111,7 +111,7 @@
   },
   {
     "id": "00000011",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "left_boot",
     "question": "What is the purpose of a <div></div> in HTML?",
     "tags": ["HTML", "Web Development"],
@@ -122,7 +122,7 @@
   },
   {
     "id": "00000012",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "large_square",
     "question": "Which of the following tags is used to add a line-break in HTML?",
     "tags": ["HTML", "Web Development"],
@@ -133,7 +133,7 @@
   },
   {
     "id": "00000013",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "horizontal_bar",
     "question": "Which of the following attributes is used to open an hyperlink in new tab?",
     "tags": ["HTML", "Web Development"],
@@ -144,7 +144,7 @@
   },
   {
     "id": "00000014",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "left_boot",
     "question": "Which of the following is the correct way to add a background color to the <body> in HTML?",
     "tags": ["HTML", "Web Development"],
@@ -155,7 +155,7 @@
   },
   {
     "id": "00000015",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "left_boot",
     "question": "Which of the following is the correct HTML syntax to make a checkbox?",
     "tags": ["HTML", "Web Development"],
@@ -166,7 +166,7 @@
   },
   {
     "id": "00000017",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "short_vertical_bar",
     "question": "Which of the following tags is used for create a drop-down selection list?",
     "tags": ["HTML", "Web Development"],
@@ -177,7 +177,7 @@
   },
   {
     "id": "00000018",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "short_horizontal_bar",
     "question": "Which of the following tags is used to add a header to an HTML5 table?",
     "tags": ["HTML", "Web Development"],
@@ -188,7 +188,7 @@
   },
   {
     "id": "00000019",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "vertical_bar",
     "question": "Which of the following elements can be used to create a table in HTML?",
     "tags": ["HTML", "Web Development"],
@@ -199,7 +199,7 @@
   },
   {
     "id": "00000020",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "horizontal_bar",
     "question": "Which of the following is CSS an abbreviation for?",
     "tags": ["CSS", "Web Development"],
@@ -210,7 +210,7 @@
   },
   {
     "id": "00000021",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "vertical_bar",
     "question": "Using padding creates a space outside which of the following areas:",
     "tags": ["CSS", "Web Development"],
@@ -221,7 +221,7 @@
   },
   {
     "id": "00000022",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "large_square",
     "question": "Which one of the following is the correct way of adding Inline styles.",
     "tags": ["CSS", "Web Development"],
@@ -232,7 +232,7 @@
   },
   {
     "id": "00000023",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "large_square",
     "question": "Which of the following is the correct CSS syntax?",
     "tags": ["CSS", "Web Development"],
@@ -243,7 +243,7 @@
   },
   {
     "id": "00000024",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "large_square",
     "question": "Which of the following is the correct HTML element to define emphasized text?",
     "tags": ["CSS", "Web Development"],
@@ -254,7 +254,7 @@
   },
   {
     "id": "00000025",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "horizontal_bar",
     "question": "How do we add a comment in CSS file?",
     "tags": ["CSS", "Web Development"],
@@ -265,7 +265,7 @@
   },
   {
     "id": "00000026",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "short_vertical_bar",
     "question": "If 'padding: 10px 5px 20px 0px' is given. What does this represent?",
     "tags": ["CSS", "Web Development"],
@@ -276,7 +276,7 @@
   },
   {
     "id": "00000027",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "short_horizontal_bar",
     "question": "What is the correct representation to change the color of h2 element?",
     "tags": ["CSS", "Web Development"],
@@ -287,7 +287,7 @@
   },
   {
     "id": "00000028",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "horizontal_bar",
     "question": "Where in HTML document is the conventionally correct place to put reference to an external style sheet?",
     "tags": ["CSS", "Web Development"],
@@ -298,7 +298,7 @@
   },
   {
     "id": "00000029",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "left_boot",
     "question": "What is the default margin of the body element?",
     "tags": ["CSS", "Web Development"],
@@ -309,13 +309,133 @@
   },
   {
     "id": "00000030",
-    "type": "mcq",
+    "type": "MCQ",
     "shape": "vertical_bar",
     "question": "What is the correct CSS syntax to make all paragraph (p) elements bold?",
     "tags": ["CSS", "Web Development"],
     "params": {
       "options": ["{p font-size:bold;}", "p{font-weight :bold;}", "<p style=“font-size=bold;”>", "None of the Above"],
       "answer": "p{font-weight :bold;}"
+    }
+  },
+  {
+    "id": "00000031",
+    "type": "FillTheBlank",
+    "shape": "vertical_bar",
+    "question": "Fill in the blank.",
+    "tags": ["JavaScript"],
+    "params": {
+      "phraseStart": "You can use Object.",
+      "phraseEnd": "to get the keys of an objects",
+      "answer": "keys"
+    }
+  },
+  {
+    "id": "00000032",
+    "type": "FillTheBlank",
+    "shape": "vertical_bar",
+    "question": "Fill in the blank.",
+    "tags": ["testing"],
+    "params": {
+      "phraseStart": "TDD stands for",
+      "phraseEnd": "",
+      "answer": "win"
+    }
+  },
+  {
+    "id": "00000033",
+    "type": "FillTheBlank",
+    "shape": "vertical_bar",
+    "question": "Fill in the blank.",
+    "tags": ["JavaScript", "strings"],
+    "params": {
+      "phraseStart": "To check if two strings are equal you would use ",
+      "phraseEnd": "equals signs",
+      "answer": "3"
+    }
+  },
+  {
+    "id": "00000034",
+    "type": "FillTheBlank",
+    "shape": "large_square",
+    "question": "Fill in the blank.",
+    "tags": ["hope"],
+    "params": {
+      "phraseStart": "The ",
+      "phraseEnd": " function will turn a valid string into an integer",
+      "answer": "parseInt"
+    }
+  },
+  {
+    "id": "00000035",
+    "type": "FillTheBlank",
+    "shape": "vertical_bar",
+    "question": "Fill in the blank.",
+    "tags": ["hope"],
+    "params": {
+      "phraseStart": "A Colour denoted by a Hex Tag always starts with a",
+      "phraseEnd": ".",
+      "answer": "#"
+    }
+  },
+  {
+    "id": "00000036",
+    "type": "FillTheBlank",
+    "shape": "large_square",
+    "question": "Fill in the blank.",
+    "tags": ["JavaScript"],
+    "params": {
+      "phraseStart": "To print Hello World in JavaScript you would write",
+      "phraseEnd": ".",
+      "answer": "console.log(\"Hello World\")"
+    }
+  },
+  {
+    "id": "00000037",
+    "type": "FillTheBlank",
+    "shape": "vertical_bar",
+    "question": "Fill in the blank.",
+    "tags": ["JavaScript", "arrays"],
+    "params": {
+      "phraseStart": "The ",
+      "phraseEnd": "function uses an accumulator and a current value",
+      "answer": "reduce"
+    }
+  },
+  {
+    "id": "00000038",
+    "type": "FillTheBlank",
+    "shape": "vertical_bar",
+    "question": "Fill in the blank.",
+    "tags": ["JavaScript", "arrays"],
+    "params": {
+      "phraseStart": "To add the number 2 to an array of integers in JavaScript called \"arr\", you would write",
+      "phraseEnd": ".",
+      "answer": "arr.push(2)"
+    }
+  },
+  {
+    "id": "00000039",
+    "type": "FillTheBlank",
+    "shape": "large_square",
+    "question": "Fill in the blank.",
+    "tags": ["General Knowledge", "Web Development"],
+    "params": {
+      "phraseStart": "DOM is an abbreviation for",
+      "phraseEnd": ".",
+      "answer": "Document Object Model"
+    }
+  },
+  {
+    "id": "00000040",
+    "type": "FillTheBlank",
+    "shape": "horizontal_bar",
+    "question": "Fill in the blank.",
+    "tags": ["hope"],
+    "params": {
+      "phraseStart": "There are",
+      "phraseEnd": "versions of ECMA-262. Write your answer as a number",
+      "answer": "11"
     }
   }
 ]
