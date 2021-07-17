@@ -18,7 +18,13 @@ const express = require("express")
 // const bodyParser = require("body-parser");
 
 var cors = require("cors")
-var whitelist = ["http://localhost:8000"]
+var whitelist = [
+  "http://localhost:8000",
+  "https://dominate-fe.onrender.com",
+  "http://dominate-fe.onrender.com",
+  "http://dominate.codes",
+  "https://dominate.codes"
+]
 var corsOptions = {
   origin: function (origin, callback) {
     var originIsWhitelisted = whitelist.indexOf(origin) !== -1
