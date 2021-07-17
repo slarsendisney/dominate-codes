@@ -1,92 +1,321 @@
 [
   {
-    "id": "12345678",
+    "id": "00000001",
     "type": "mcq",
     "shape": "large_square",
-    "question": "What is the best programming language for everything?",
-    "caption": "Questions could sometimes have an additional subcaption",
-    "options": ["JavaScript", "Python", "Java", "Haskell"],
-    "answer": "JavaScript",
-    "tags": ["general knowledge"]
+    "question": "What does HTML stands for?",
+    "tags": ["General Knowledge", "HTML", "Web Development"],
+    "params": {
+      "options": ["Hypertext Machine language", "Humans Talking Machine Languages", "Hypertext Multiple Language", "Hypertext Markup Language"],
+      "answer": "Hypertext Markup Language"
+    }
   },
   {
-    "id": "22345678",
+    "id": "00000002",
     "type": "mcq",
-    "shape": "horizontal_bar",
-    "question": "What is the best programming language for everything?",
-    "caption": "Questions could sometimes have an additional subcaption",
-    "options": ["JavaScript", "Python", "Java", "Haskell"],
-    "answer": "JavaScript",
-    "tags": ["general knowledge"]
+    "shape": "large_square",
+    "question": "Which of the following initializes the document type in HTML5?",
+    "tags": ["General Knowledge", "HTML", "Web Development"],
+    "params": {
+      "options": ["</DOCTYPE HTML>", "</DOCTYPE>", "<!DOCTYPE HTML>", "</DOCTYPE html>"],
+      "answer": "<!DOCTYPE HTML>"
+    }
   },
   {
-    "id": "32345678",
+    "id": "00000003",
+    "type": "mcq",
+    "shape": "large_square",
+    "question": "Which of the following HTML tags is used to make text bold?",
+    "tags": ["General Knowledge", "HTML", "Web Development"],
+    "params": {
+      "options": ["<p>", "<i>", "<li>", "<b>"],
+      "answer": "<b>"
+    }
+  },
+  {
+    "id": "00000004",
     "type": "mcq",
     "shape": "vertical_bar",
-    "question": "What is the best programming language for everything?",
-    "caption": "Questions could sometimes have an additional subcaption",
-    "options": ["JavaScript", "Python", "Java", "Haskell"],
-    "answer": "JavaScript",
-    "tags": ["general knowledge"]
+    "question": "Which of the following HTML tags is used to make text italic?",
+    "tags": ["General Knowledge", "HTML", "Web Development"],
+    "params": {
+      "options": ["<p>", "<i>", "<li>", "<b>"],
+      "answer": "<i>"
+    }
   },
   {
-    "id": "42345678",
+    "id": "00000005",
     "type": "mcq",
-    "shape": "short_horizontal_bar",
-    "question": "What is the best programming language for everything?",
-    "caption": "Questions could sometimes have an additional subcaption",
-    "options": ["JavaScript", "Python", "Java", "Haskell"],
-    "answer": "JavaScript",
-    "tags": ["general knowledge"]
+    "shape": "large_square",
+    "question": "Which of the following HTML tags is used to make an unordered list?",
+    "tags": ["General Knowledge", "HTML", "Web Development"],
+    "params": {
+      "options": ["<ui>", "<i>", "<em>", "<ul>"],
+      "answer": "<ul>"
+    }
   },
   {
-    "id": "52345678",
+    "id": "00000006",
+    "type": "mcq",
+    "shape": "large_square",
+    "question": "Which of the following HTML tags is used to make an ordered list?",
+    "tags": ["General Knowledge", "HTML", "Web Development"],
+    "params": {
+      "options": ["<ul>", "<ol>", "<orderedlist>", "<olist>"],
+      "answer": "<ol>"
+    }
+  },
+  {
+    "id": "00000007",
+    "type": "mcq",
+    "shape": "vertical_bar",
+    "question": "Which of the following characters is used in a closing HTML tag?",
+    "tags": ["General Knowledge", "HTML", "Web Development"],
+    "params": {
+      "options": [".", "/", "\\", "!"],
+      "answer": "/"
+    }
+  },
+  {
+    "id": "00000008",
+    "type": "mcq",
+    "shape": "large_square",
+    "question": "What is the font-size of the <h1> heading tag?",
+    "tags": ["HTML", "Web Development"],
+    "params": {
+      "options": ["3.5 em", "2.17 em", "2 em", "1.5 em"],
+      "answer": "2 em"
+    }
+  },
+  {
+    "id": "00000009",
+    "type": "mcq",
+    "shape": "vertical_bar",
+    "question": "How many heading tags are there in HTML5?",
+    "tags": ["HTML", "Web Development"],
+    "params": {
+      "options": ["2", "3", "5", "6"],
+      "answer": "6"
+    }
+  },
+  {
+    "id": "00000010",
+    "type": "mcq",
+    "shape": "horizontal_bar",
+    "question": "Which of the following attributes is used to add link to any element?",
+    "tags": ["HTML", "Web Development"],
+    "params": {
+      "options": ["link", "ref", "href", "newref"],
+      "answer": "href"
+    }
+  },
+  {
+    "id": "00000011",
+    "type": "mcq",
+    "shape": "left_boot",
+    "question": "What is the purpose of a <div></div> in HTML?",
+    "tags": ["HTML", "Web Development"],
+    "params": {
+      "options": ["To create different styles", "To create different sections", "To separate headings only", "To add titles"],
+      "answer": "To create different sections"
+    }
+  },
+  {
+    "id": "00000012",
+    "type": "mcq",
+    "shape": "large_square",
+    "question": "Which of the following tags is used to add a line-break in HTML?",
+    "tags": ["HTML", "Web Development"],
+    "params": {
+      "options": ["<br>", "<break>", "</break>", "</br>"],
+      "answer": "</br>"
+    }
+  },
+  {
+    "id": "00000013",
+    "type": "mcq",
+    "shape": "horizontal_bar",
+    "question": "Which of the following attributes is used to open an hyperlink in new tab?",
+    "tags": ["HTML", "Web Development"],
+    "params": {
+      "options": ["tab", "href", "target", "ref"],
+      "answer": "target"
+    }
+  },
+  {
+    "id": "00000014",
+    "type": "mcq",
+    "shape": "left_boot",
+    "question": "Which of the following is the correct way to add a background color to the <body> in HTML?",
+    "tags": ["HTML", "Web Development"],
+    "params": {
+      "options": ["<body color = “green”>", "<body bg-color = “green”>", "<body style = “background-color=green”>", "<body style='background-color: green;'>"],
+      "answer": "<body style='background-color: green;'>"
+    }
+  },
+  {
+    "id": "00000015",
+    "type": "mcq",
+    "shape": "left_boot",
+    "question": "Which of the following is the correct HTML syntax to make a checkbox?",
+    "tags": ["HTML", "Web Development"],
+    "params": {
+      "options": ["<checkbox>", "<input type='checkbox'>", "<check>", "<input type='check'>"],
+      "answer": "<input type='checkbox'>"
+    }
+  },
+  {
+    "id": "00000017",
     "type": "mcq",
     "shape": "short_vertical_bar",
-    "question": "What is the best programming language for everything?",
-    "caption": "Questions could sometimes have an additional subcaption",
-    "options": ["JavaScript", "Python", "Java", "Haskell"],
-    "answer": "JavaScript",
-    "tags": ["general knowledge"]
+    "question": "Which of the following tags is used for create a drop-down selection list?",
+    "tags": ["HTML", "Web Development"],
+    "params": {
+      "options": ["<select>", "<option>", "<dropdown>", "<list>"],
+      "answer": "<select>"
+    }
   },
   {
-    "id": "62345678",
+    "id": "00000018",
+    "type": "mcq",
+    "shape": "short_horizontal_bar",
+    "question": "Which of the following tags is used to add a header to an HTML5 table?",
+    "tags": ["HTML", "Web Development"],
+    "params": {
+      "options": ["<theader>", "<h1>", "<th>", "<header>"],
+      "answer": "<th>"
+    }
+  },
+  {
+    "id": "00000019",
+    "type": "mcq",
+    "shape": "vertical_bar",
+    "question": "Which of the following elements can be used to create a table in HTML?",
+    "tags": ["HTML", "Web Development"],
+    "params": {
+      "options": ["<table> , <tbody> , <trow>", "<table> , <tb> , <trow>", "<table> , <tbody> , <tr>", "All of the above"],
+      "answer": "<table> , <tbody> , <tr>"
+    }
+  },
+  {
+    "id": "00000020",
+    "type": "mcq",
+    "shape": "horizontal_bar",
+    "question": "Which of the following is CSS an abbreviation for?",
+    "tags": ["CSS", "Web Development"],
+    "params": {
+      "options": ["Color Style Sheet", "Cascading Style Sheets", "Creative Style Sheet", "Control Style Sheet"],
+      "answer": "Cascading Style Sheets"
+    }
+  },
+  {
+    "id": "00000021",
+    "type": "mcq",
+    "shape": "vertical_bar",
+    "question": "Using padding creates a space outside which of the following areas:",
+    "tags": ["CSS", "Web Development"],
+    "params": {
+      "options": ["Border", "Content", "Margin", "All of the above"],
+      "answer": "Content"
+    }
+  },
+  {
+    "id": "00000022",
     "type": "mcq",
     "shape": "large_square",
-    "question": "What is the best programming language for everything?",
-    "caption": "Questions could sometimes have an additional subcaption",
-    "options": ["JavaScript", "Python", "Java", "Haskell"],
-    "answer": "JavaScript",
-    "tags": ["general knowledge"]
+    "question": "Which one of the following is the correct way of adding Inline styles.",
+    "tags": ["CSS", "Web Development"],
+    "params": {
+      "options": ["<p style=“font-size:16px;”>Geeksforgeeks</p>", "<p inline style=“font-size:16px”>Geeksforgeeks</p>", "<p inline style=“font-size 16px”>Geeksforgeeks</p>", "<p style=“font-size 16px;”>Geeksforgeeks</p>"],
+      "answer": "<p style=“font-size:16px;”>Geeksforgeeks</p>"
+    }
   },
   {
-    "id": "72345678",
-    "type": "mcq",
-    "shape": "left_boot",
-    "question": "What is the best programming language for everything?",
-    "caption": "Questions could sometimes have an additional subcaption",
-    "options": ["JavaScript", "Python", "Java", "Haskell"],
-    "answer": "JavaScript",
-    "tags": ["general knowledge"]
-  },
-  {
-    "id": "82345678",
-    "type": "mcq",
-    "shape": "left_boot",
-    "question": "What is the best programming language for everything?",
-    "caption": "Questions could sometimes have an additional subcaption",
-    "options": ["JavaScript", "Python", "Java", "Haskell"],
-    "answer": "JavaScript",
-    "tags": ["general knowledge"]
-  },
-  {
-    "id": "92345678",
+    "id": "00000023",
     "type": "mcq",
     "shape": "large_square",
-    "question": "What is the best programming language for everything?",
-    "caption": "Questions could sometimes have an additional subcaption",
-    "options": ["JavaScript", "Python", "Java", "Haskell"],
-    "answer": "JavaScript",
-    "tags": ["general knowledge"]
+    "question": "Which of the following is the correct CSS syntax?",
+    "tags": ["CSS", "Web Development"],
+    "params": {
+      "options": ["p:color=green, font-size=15px", "{p:color=green, font-size=15px}", "p {color:green, font-size:15px;}", "p {color:green; font-size:15px;]}"],
+      "answer": "p {color:green; font-size:15px;]}"
+    }
+  },
+  {
+    "id": "00000024",
+    "type": "mcq",
+    "shape": "large_square",
+    "question": "Which of the following is the correct HTML element to define emphasized text?",
+    "tags": ["CSS", "Web Development"],
+    "params": {
+      "options": ["<italic>", "<em>", "<i>", "<emph>"],
+      "answer": "<em>"
+    }
+  },
+  {
+    "id": "00000025",
+    "type": "mcq",
+    "shape": "horizontal_bar",
+    "question": "How do we add a comment in CSS file?",
+    "tags": ["CSS", "Web Development"],
+    "params": {
+      "options": ["Geeksforgeeks", "/ Geeksforgeeks /", "/*Geeksforgeeks*/", "//*Geeksforgeek]s*//"],
+      "answer": "/*Geeksforgeeks*/"
+    }
+  },
+  {
+    "id": "00000026",
+    "type": "mcq",
+    "shape": "short_vertical_bar",
+    "question": "If 'padding: 10px 5px 20px 0px' is given. What does this represent?",
+    "tags": ["CSS", "Web Development"],
+    "params": {
+      "options": ["left:10px , top:5px , right:20px , bottom:0px", "top:10px , right:5px , bottom:20px , left:0px", "right:10px , bottom:5px , left:20px , top:0px", "bottom:10px , left:5px , top:20px , right:0px"],
+      "answer": "top:10px , right:5px , bottom:20px , left:0px"
+    }
+  },
+  {
+    "id": "00000027",
+    "type": "mcq",
+    "shape": "short_horizontal_bar",
+    "question": "What is the correct representation to change the color of h2 element?",
+    "tags": ["CSS", "Web Development"],
+    "params": {
+      "options": ["h2 { background-color: #008000 }", "{h2 background-color: #008000}", "h2.all{ background-color: #008000 }", "{h2.all background-color: #008000}]"],
+      "answer": "h2 { background-color: #008000 }"
+    }
+  },
+  {
+    "id": "00000028",
+    "type": "mcq",
+    "shape": "horizontal_bar",
+    "question": "Where in HTML document is the conventionally correct place to put reference to an external style sheet?",
+    "tags": ["CSS", "Web Development"],
+    "params": {
+      "options": ["In the HEAD section", "In the BODY section", "Both of the Above", "None of the Above"],
+      "answer": "In the HEAD section"
+    }
+  },
+  {
+    "id": "00000029",
+    "type": "mcq",
+    "shape": "left_boot",
+    "question": "What is the default margin of the body element?",
+    "tags": ["CSS", "Web Development"],
+    "params": {
+      "options": ["10px", "8px", "12px", "6px"],
+      "answer": "8px"
+    }
+  },
+  {
+    "id": "00000030",
+    "type": "mcq",
+    "shape": "vertical_bar",
+    "question": "What is the correct CSS syntax to make all paragraph (p) elements bold?",
+    "tags": ["CSS", "Web Development"],
+    "params": {
+      "options": ["{p font-size:bold;}", "p{font-weight :bold;}", "<p style=“font-size=bold;”>", "None of the Above"],
+      "answer": "p{font-weight :bold;}"
+    }
   }
 ]
