@@ -7,6 +7,7 @@ import Lobby from "./Lobby"
 import ChooseMap from "./ChooseMap"
 import QuestionContainer from "./QuestionContainer"
 import GameOver from "./GameOver"
+import Rotate from "../../assets/rotate.svg"
 
 const Game = ({ code }) => {
   const { room, gameStart, gameState, gameEnd, disconnected } = useGame()
@@ -79,12 +80,20 @@ const Game = ({ code }) => {
   }
 
   return (
+    <>
+    <div className="xs:hidden absolute top-0 z-30 left-0 w-full h-screen bg-white text-gray-800 flex flex-col space-y-6 items-center justify-center">
+        <img src={Rotate} className="h-12 w-12"/>
+        <p>Please rotate your device.</p>
+      </div>
     <div className="relative w-full">
+      
       {event && (
         <QuestionContainer activeEvent={event} reset={resetQuestionContainer} />
       )}
       <GameProgress />
+      <div className="transform scale-65 sm:scale-75 md:scale-50 lg:scale-100">
       <GameMap activateEvent={activateEvent} />
+      </div>
       {/* <div className="absolute bottom-0 left-0 h-48 bg-gray-100 rounded m-2 p-2 overflow-y-scroll">
         {JSON.stringify(gameState.events, null, "\t")}
       </div> */}
@@ -110,6 +119,7 @@ const Game = ({ code }) => {
         </div>
       )}
     </div>
+    </>
   )
 }
 
