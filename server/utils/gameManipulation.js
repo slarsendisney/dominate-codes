@@ -1,20 +1,21 @@
 const { updateCaptures } = require("../../utils/updateCaptures")
 const questions = require("../data/questionBank.json")
 
+const maps = require("../map-data.json")
 const intialColors = [
-  {primary: "#F59E0B", light:"#FBBF24", dark: "#D97706"},
-  {primary: "#10B981", light:"#34D399", dark: "#059669"},
-  {primary: "#EC4899",  light:"#F472B6", dark: "#DB2777"}
+  { primary: "#F59E0B", light: "#FBBF24", dark: "#D97706" },
+  { primary: "#10B981", light: "#34D399", dark: "#059669" },
+  { primary: "#EC4899", light: "#F472B6", dark: "#DB2777" },
 ]
 
-async function roomSetup(roomId, socket, firebase) {
+async function roomSetup(roomId, category, map, socket, firebase) {
   await firebase
     .firestore()
     .collection("rooms")
     .doc(roomId)
     .set(
       {
-        dimensions: { width: 10, height: 10 },
+        ...maps[category][map],
         events: [],
         occupied: {},
         gameStart: false,
@@ -57,25 +58,25 @@ async function gameStart(roomId, firebase, io) {
     .collection("rooms")
     .doc(roomId)
     .get()
-  const { dimensions, counter, players } = document.data()
+  const { dimensions, counter, players, omissions } = document.data()
   const events = [
     await generateEvent(
       roomId,
-      getRandomCoordinates(dimensions),
+      getRandomCoordinates(dimensions, omissions),
       firebase,
       io,
       true
     ),
     await generateEvent(
       roomId,
-      getRandomCoordinates(dimensions),
+      getRandomCoordinates(dimensions, omissions),
       firebase,
       io,
       true
     ),
     await generateEvent(
       roomId,
-      getRandomCoordinates(dimensions),
+      getRandomCoordinates(dimensions, omissions),
       firebase,
       io,
       true
@@ -90,7 +91,7 @@ async function gameStart(roomId, firebase, io) {
   )
   // generate intial events
   sendGameState(roomId, firebase, io)
-  gameLoop(roomId, firebase, io, dimensions, counter, players)
+  gameLoop(roomId, firebase, io, dimensions, counter, players, omissions)
 }
 
 function checkPlayersPresent(roomId, players, io) {
@@ -147,9 +148,13 @@ function sendGameState(roomId, firebase, io) {
     .then(data => io.to(roomId).emit("gameState", data.data()))
 }
 
-function getRandomCoordinates(dimensions) {
-  const x = Math.ceil(Math.random() * dimensions.width - 1)
-  const y = Math.ceil(Math.random() * dimensions.height - 1)
+function getRandomCoordinates(dimensions, omissions) {
+  let x = Math.ceil(Math.random() * dimensions.width - 1)
+  let y = Math.ceil(Math.random() * dimensions.height - 1)
+  while (omissions?.[x]?.[y]) {
+    x = Math.ceil(Math.random() * dimensions.width - 1)
+    y = Math.ceil(Math.random() * dimensions.height - 1)
+  }
   return [x, y]
 }
 
@@ -163,7 +168,7 @@ async function endGame(roomId, firebase, io) {
   sendGameState(roomId, firebase, io)
 }
 
-async function gameLoop(roomId, firebase, io, dimensions, counter, players) {
+async function gameLoop(roomId, firebase, io, dimensions, counter, players, omissions) {
   let countdown = counter
   // await sendGameState(roomId, firebase, io)
   // at random time intervals add more
@@ -174,8 +179,8 @@ async function gameLoop(roomId, firebase, io, dimensions, counter, players) {
       countdown--
 
       let rnd = Math.random()
-      if (rnd < 0.75) {
-        generateEvent(roomId, getRandomCoordinates(dimensions), firebase, io)
+      if (rnd < 0.15) {
+        generateEvent(roomId, getRandomCoordinates(dimensions, omissions), firebase, io)
         sendGameState(roomId, firebase, io)
       }
 
