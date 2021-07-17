@@ -13,7 +13,7 @@ import DefeatCard from "../cards/DefeatCard"
 
 const QuestionContainer = ({ activeEvent, reset }) => {
   const {
-    question: { question, id, eventType, options, answer },
+    question: { question, id, type, params : { options, answer} },
     position,
   } = activeEvent
   const { submitVictory, submitPenalty, currentPlayerColor, addTimeout } = useGame()

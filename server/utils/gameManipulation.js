@@ -53,8 +53,15 @@ async function joinRoom(roomId, name, socket, firebase, io) {
   }
 }
 
-// adds all players
-// adds initial game events
+function calcInclusions(dimensions, omissions){
+  const inclusions = []
+  for (var i = 0; i < dimensions.width; i++) {
+    for (var j = 0; j < dimensions.height; j++) {
+      if (!omissions?.[j]?.[i]) inclusions.push([i, j])
+    }
+  }
+  return inclusions
+}
 async function gameStart(roomId, firebase, io) {
   const document = await firebase
     .firestore()
@@ -64,12 +71,7 @@ async function gameStart(roomId, firebase, io) {
   const { dimensions, counter, players, omissions } = document.data()
 
   // Create inclusions
-  const inclusions = []
-  for (var i = 0; i < dimensions.width; i++) {
-    for (var j = 0; j < dimensions.height; j++) {
-      if (!omissions?.[j]?.[i]) inclusions.push([i, j])
-    }
-  }
+  const inclusions = calcInclusions(dimensions, omissions)
 
   if (typeof inclusions === "undefined") return
 
@@ -107,7 +109,7 @@ async function gameStart(roomId, firebase, io) {
   )
   // generate intial events
   sendGameState(roomId, firebase, io)
-  gameLoop(roomId, firebase, io, dimensions, counter, players, inclusions)
+  gameLoop(roomId, firebase, io, dimensions, counter, players, omissions)
 }
 
 function checkPlayersPresent(roomId, players, io) {
@@ -164,8 +166,8 @@ function sendGameState(roomId, firebase, io) {
 }
 
 function getRandomCoordinates(dimensions, inclusions) {
-  // console.log(inclusions)
-  const [x, y] = inclusions[Math.floor(Math.random() * inclusions.length - 1)]
+  const position = inclusions[Math.floor(Math.random() * inclusions.length - 1)]
+  const [x, y] = position || [-1, -1]
   return [y, x]
 }
 
@@ -186,7 +188,7 @@ async function gameLoop(
   dimensions,
   counter,
   players,
-  inclusions
+  omissions
 ) {
   let countdown = counter
   // await sendGameState(roomId, firebase, io)
@@ -197,7 +199,7 @@ async function gameLoop(
       io.to(roomId).emit("counter", countdown)
       countdown--
 
-      if (typeof inclusions === "undefined") return
+      let inclusions = calcInclusions(dimensions, omissions)
 
       let rnd = Math.random()
       if (rnd < 0.5 && typeof inclusions !== "undefined") {
