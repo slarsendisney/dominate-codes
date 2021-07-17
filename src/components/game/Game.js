@@ -4,14 +4,31 @@ import GameMap from "./GameMap"
 import GameProgress from "./GameProgress"
 import Join from "./Join"
 import Lobby from "./Lobby"
+import ChooseMap from "./ChooseMap"
 import QuestionContainer from "./QuestionContainer"
 
 const Game = ({ code }) => {
-  const { room, gameStart, gameState, gameEnd } = useGame()
+  const { room, gameStart, gameEnd } = useGame()
   const [event, setEvent] = useState(false)
+  const [create, setCreate] = useState(false)
+  const [createSubmitted, setCreateSubmitted] = useState(false)
+  if (create) {
+    return (
+      <ChooseMap
+        reset={() => setCreate(false)}
+        submit={() => {
+          setCreateSubmitted(true)
+          setCreate(false)
+        }}
+      />
+    )
+  }
+  if (createSubmitted && !room) {
+    return <p>Loading</p>
+  }
 
   if (!room) {
-    return <Join code={code} />
+    return <Join code={code} createTime={() => setCreate(true)} />
   }
 
   if (!gameStart) {
@@ -21,7 +38,7 @@ const Game = ({ code }) => {
   if (gameEnd) {
     return <p>GAME OVER BIATCHESSSS</p>
   }
-  const activateEvent = (activeEvent) => {
+  const activateEvent = activeEvent => {
     setEvent(activeEvent)
   }
 
@@ -32,10 +49,7 @@ const Game = ({ code }) => {
   return (
     <div className="relative w-full">
       {event && (
-        <QuestionContainer
-          activeEvent={event}
-          reset={resetQuestionContainer}
-        />
+        <QuestionContainer activeEvent={event} reset={resetQuestionContainer} />
       )}
       <GameProgress />
       <GameMap activateEvent={activateEvent} />
