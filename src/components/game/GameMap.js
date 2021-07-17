@@ -89,7 +89,6 @@ const GameMap = ({ delayPerPixel = 0.0008, activateEvent }) => {
     return {}
   }, [eventPreview])
   const variants = fullVariants(players, colors)
-  console.log({variants, players, socketID})
   return (
     <div className="h-screen w-full flex items-center justify-center">
       <div

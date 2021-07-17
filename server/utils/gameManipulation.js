@@ -174,7 +174,7 @@ async function gameLoop(roomId, firebase, io, dimensions, counter, players) {
       countdown--
 
       let rnd = Math.random()
-      if (rnd < 0.15) {
+      if (rnd < 0.75) {
         generateEvent(roomId, getRandomCoordinates(dimensions), firebase, io)
         sendGameState(roomId, firebase, io)
       }
