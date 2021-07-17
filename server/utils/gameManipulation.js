@@ -5,10 +5,10 @@ const maps = require("../map-data.json")
 const intialColors = [
   { primary: "#F59E0B", lighter: "#FEF3C7", light: "#FBBF24", dark: "#D97706" },
   { primary: "#10B981", lighter: "#D1FAE5", light: "#34D399", dark: "#059669" },
-  { primary: "#EC4899", lighter: "#DBEAFE",light: "#F472B6", dark: "#DB2777" },
+  { primary: "#EC4899", lighter: "#DBEAFE", light: "#F472B6", dark: "#DB2777" },
 ]
 
-async function roomSetup(roomId, category, map, socket, firebase) {
+async function roomSetup(roomId, name, category, map, socket, firebase) {
   await firebase
     .firestore()
     .collection("rooms")
@@ -20,16 +20,16 @@ async function roomSetup(roomId, category, map, socket, firebase) {
         occupied: {},
         gameStart: false,
         gameEnd: false,
-        counter: 5,
+        counter: 180,
         owner: socket.id,
         colors: intialColors,
-        players: [socket.id],
+        players: [{ socket: socket.id, name }],
       },
       { merge: true }
     )
 }
 
-async function joinRoom(roomId, socket, firebase, io) {
+async function joinRoom(roomId, name, socket, firebase, io) {
   const doc = await firebase.firestore().collection("rooms").doc(roomId).get()
   if (doc.exists) {
     await firebase
@@ -38,7 +38,10 @@ async function joinRoom(roomId, socket, firebase, io) {
       .doc(roomId)
       .set(
         {
-          players: firebase.firestore.FieldValue.arrayUnion(socket.id),
+          players: firebase.firestore.FieldValue.arrayUnion({
+            name,
+            socket: socket.id,
+          }),
         },
         { merge: true }
       )
@@ -98,7 +101,7 @@ async function gameStart(roomId, firebase, io) {
       events,
       occupied: {},
       gameStart: true,
-      gameEnd:false,
+      gameEnd: false,
     },
     { merge: true }
   )
@@ -111,13 +114,12 @@ function checkPlayersPresent(roomId, players, io) {
   const inRoom = io.sockets.adapter.rooms.get(roomId)
   let flag = true
   if (inRoom && players) {
-    players.forEach(id => {
-      if (!inRoom.has(id)) {
+    players.forEach(({socket}) => {
+      if (!inRoom.has(socket)) {
         flag = false
       }
     })
   }
-
   return flag
 }
 
@@ -163,8 +165,8 @@ function sendGameState(roomId, firebase, io) {
 
 function getRandomCoordinates(dimensions, inclusions) {
   // console.log(inclusions)
-  const [x,y] =  inclusions[Math.floor(Math.random() * inclusions.length - 1)]
-  return [y,x]
+  const [x, y] = inclusions[Math.floor(Math.random() * inclusions.length - 1)]
+  return [y, x]
 }
 
 async function endGame(roomId, firebase, io) {
@@ -195,10 +197,10 @@ async function gameLoop(
       io.to(roomId).emit("counter", countdown)
       countdown--
 
-      if (typeof inclusions === "undefined") return 
+      if (typeof inclusions === "undefined") return
 
       let rnd = Math.random()
-      if (rnd < 0.5 && (typeof inclusions !== "undefined")) {
+      if (rnd < 0.5 && typeof inclusions !== "undefined") {
         generateEvent(
           roomId,
           getRandomCoordinates(dimensions, inclusions),

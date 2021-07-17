@@ -13,3 +13,7 @@
 .default-btn {
   @apply border-gray-200 border-2 text-gray-800 px-4 py-2;
 }
+
+.firebaseui-card-content{
+  padding: 0px !important;
+}

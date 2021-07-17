@@ -5,7 +5,7 @@ import Clock from "../../assets/Clock"
 
 function getProgress(occupied, possibleCaptureCount, players) {
   const intial = {}
-  players.forEach(id => (intial[id] = { count: 0 }))
+  players.forEach(({socket}) => (intial[socket] = { count: 0 }))
   const playerProgress = Object.keys(occupied).reduce((acc, x) => {
     Object.keys(occupied[x]).map(y => {
       const user = occupied[x][y]
@@ -66,8 +66,8 @@ const GameProgress = () => {
   )
 
   let playersWithColors = React.useMemo(()=> {
-    return players.reduce((acc, cur, i) => {
-      acc.push({uid:cur, ...colors[i], ...progress[cur]})
+    return players.reduce((acc, {name, socket}, i) => {
+      acc.push({uid:name, ...colors[i], ...progress[socket]})
       return acc
     }, []).sort(compare)
   }, [colors, players])

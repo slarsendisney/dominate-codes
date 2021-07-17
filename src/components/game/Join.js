@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react"
+import { useAuth } from "../../context/auth-context"
 import { useGame } from "../../context/game-context"
 import Header from "../Header"
 
 const Join = ({ code, createTime }) => {
   const [roomId, setRoomId] = useState()
+  const {name} = useAuth()
   const { joinRoom } = useGame()
   useEffect(() => {
     if (code) {
@@ -12,9 +14,9 @@ const Join = ({ code, createTime }) => {
   }, [])
   return (
     <div className="max-w-4xl h-full flex flex-col items-center justify-center ">
-      <h1 className="text-4xl md:text-7xl font-bold mb-8">
+      <h1 className="text-4xl font-bold mb-4">
         <span class="text-indigo-800">
-          <span class="opacity-50">&lt;</span>Dominate.codes
+          <span class="opacity-50">&lt;</span>Join.Create.
           <span class="opacity-50"> /&gt;</span>
         </span>
       </h1>
@@ -32,7 +34,7 @@ const Join = ({ code, createTime }) => {
               />
               <button
                 className="primary-btn rounded"
-                onClick={() => joinRoom(roomId)}
+                onClick={() => joinRoom(roomId, name)}
               >
                 Join
               </button>
