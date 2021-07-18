@@ -24,9 +24,11 @@ const Index = () => {
   }, [])
 
   return (
-    <div className="relative">
-      <div className="py-8 md:py-24 lg:py-36 h-screen flex flex-col items-center justify-center text-gray-800 space-y-4 md:space-y-8 relative z-30">
-        <Header />
+    <>
+    <Header />
+    <div className="relative h-full md:py-0 lg:py-0">
+      <div className="px-2  h-screen flex flex-col items-center justify-center text-gray-800 space-y-4 md:space-y-8 relative z-30">
+        
         <img src={Logo} className="h-32" />
         <h1 className="text-4xl md:text-7xl font-bold">
           <span class="text-indigo-800">
@@ -95,6 +97,7 @@ const Index = () => {
         <div className="bubble"></div>
       </div>
     </div>
+    </>
   )
 }
 

@@ -3,6 +3,7 @@ import { useGame } from "../../context/game-context"
 import { CopyToClipboard } from "react-copy-to-clipboard"
 import { m as motion } from "framer-motion"
 import Header from "../Header"
+import Tutorial from "./Tutorial"
 
 const Lobby = () => {
   const { startGame, roomOwner, room, players, socketID, owner } = useGame()
@@ -21,15 +22,17 @@ const Lobby = () => {
     </div>
   )
   return (
-    <div className="max-w-4xl h-full flex flex-col items-center justify-center ">
+    <div className="max-w-4xl flex flex-col items-center justify-center ">
       <Header />
       <div className="relative ">
         <motion.div
           initial={{ y: 100 }}
           animate={{ y: 0 }}
           transition={{ type: "spring", duration: 0.8, bounce: 0.5 }}
-          className="shadow-md border w-full bg-white rounded p-4 flex flex-col  relative z-20"
+          className="md:shadow-md md:border w-full bg-white rounded p-4 flex flex-col  relative z-20"
         >
+          <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="md:border-r-2 p-4">
           {roomOwner ? (
             <div className="space-y-4">
               <p className="text-gray-400 uppercase text-xs text-center ">
@@ -50,8 +53,7 @@ const Lobby = () => {
                   </button>
                 </CopyToClipboard>
               </div>
-
-              <p>
+              <p className="text-sm">
                 Share this code with your friends so they can join the game.
               </p>
               <p className="text-gray-400 uppercase text-xs text-center ">
@@ -113,6 +115,9 @@ const Lobby = () => {
               </p>
             </div>
           )}
+          </div>
+          <Tutorial />
+          </div>
         </motion.div>
       </div>
     </div>

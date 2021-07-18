@@ -7,7 +7,7 @@ const Header = () => {
   const { user, logout } = useAuth() || {}
   return (
     <>
-      <div className="absolute top-0 left-0 w-full h-16 p-4">
+      <div className="absolute top-0 left-0 w-full h-16 p-4 z-30">
         <Link
           to="/"
           className="hover:underline cursor-pointer text-indigo-600 hover:text-indigo-800"
@@ -48,7 +48,7 @@ const Header = () => {
       <div className="absolute bottom-0 left-0 w-full  p-4 z-30">
         <div className="flex flex-col md:flex-row justify-between items-center">
           {user && user.email && (
-            <div className="p-1 py-1 mb-5 md:mb-0 bg-indigo-100 inline-block rounded-full">
+            <div className={`${user.photoURL ? "pl-1": "pl-3"} pr-1 py-1 mb-5 md:mb-0 bg-indigo-100 inline-block rounded-full`}>
               <div className="flex items-center space-x-2">
                 {user.photoURL && (
                   <img src={user.photoURL} className="rounded-full h-8" />
