@@ -35,9 +35,17 @@ var corsOptions = {
 
 const server = express()
   .use(cors(corsOptions))
-  //   .use(bodyParser.json())
-  //   .use(express.urlencoded({ extended: true }))
-  //   .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+    // .use(bodyParser.json())
+    .use(express.urlencoded({ extended: true }))
+    .get("/leaderboard", cors(corsOptions), async function (req, res) {
+      const leaderboardRef = db.collection('leaderboard');
+      const snapshot = await leaderboardRef.orderBy('score', 'desc').limit(100).get();
+      const leaderboard = []
+      snapshot.forEach(doc => {
+        leaderboard.push(doc.data())
+      });
+      res.send(leaderboard)
+    })
   .listen(PORT, () => console.log(`Listening on ${PORT}`))
 
 const io = require("socket.io")(server, {
