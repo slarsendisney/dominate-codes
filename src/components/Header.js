@@ -7,7 +7,7 @@ const Header = () => {
   const { user, logout } = useAuth() || {}
   return (
     <>
-      <div className="absolute top-0 left-0 w-full h-16 p-4">
+      <div className="absolute top-0 left-0 w-full h-16 p-4 z-30">
         <Link
           to="/"
           className="hover:underline cursor-pointer text-indigo-600 hover:text-indigo-800"
