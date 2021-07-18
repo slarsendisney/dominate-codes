@@ -4,10 +4,25 @@ import Header from "../components/Header"
 
 import "../style/bubbles.css"
 import Logo from "../assets/logo.svg"
-// import MapData from "../../server/map-data.json"
-// import MapPreview from "../components/game/MapPreview"
 import LevelUp from "../assets/LevelUp.svg"
+
+const APIURL = process.env.GATSBY_LOCAL_SOCKET
+  ? "http://localhost:3000/stats"
+  : "https://dominate-be.onrender.com/stats"
+
 const Index = () => {
+  const [data, setData] = React.useState([])
+  const [loading, setLoading] = React.useState(true)
+
+  React.useEffect(() => {
+    fetch(APIURL)
+      .then(response => response.json())
+      .then(res => {
+        setData(res)
+        setLoading(false)
+      })
+  }, [])
+
   return (
     <div className="relative">
       <div className="py-8 md:py-24 lg:py-36 h-screen flex flex-col items-center justify-center text-gray-800 space-y-4 md:space-y-8 relative z-30">
@@ -41,23 +56,29 @@ const Index = () => {
         </div>
         <div className="flex space-x-4 text-center pt-8">
           <div>
-            <p className="text-xl md:text-3xl font-bold">124</p>
+            <p className="text-xl md:text-3xl font-bold">{loading? "..." : data.online}</p>
             <p>Active Players</p>
           </div>
           <div className="h-16 bg-gray-200 my-auto" style={{ width: 2 }} />
           <div>
-            <p className="text-xl md:text-3xl font-bold">31</p>
+            <p className="text-xl md:text-3xl font-bold">{loading? "..." : data.activeRooms}</p>
             <p>Current Games</p>
           </div>
           <div className="h-16 bg-gray-200 my-auto" style={{ width: 2 }} />
           <div>
-            <p className="text-xl md:text-3xl font-bold">1054</p>
+            <p className="text-xl md:text-3xl font-bold">{loading? "..." : data.gamesPlayed}</p>
             <p>Games Played</p>
           </div>
         </div>
         <div className="flex flex-col items-center justify-center space-y-2">
           <p className="text-xs uppercase text-gray-400">Built for the</p>
-          <img src={LevelUp} className="h-24" />
+          <a
+            href="https://www.showcode.io/level-up-hack/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={LevelUp} className="h-24" />
+          </a>
           <p className="text-xs uppercase text-gray-400">Hackathon</p>
         </div>
       </div>

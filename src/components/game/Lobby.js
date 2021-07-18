@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import { useGame } from "../../context/game-context"
 import { CopyToClipboard } from "react-copy-to-clipboard"
+import { m as motion } from "framer-motion"
+import Header from "../Header"
 
 const Lobby = () => {
   const { startGame, roomOwner, room, players, socketID, owner } = useGame()
@@ -20,8 +22,14 @@ const Lobby = () => {
   )
   return (
     <div className="max-w-4xl h-full flex flex-col items-center justify-center ">
+      <Header />
       <div className="relative ">
-        <div className="shadow-md border w-full bg-white rounded p-4 flex flex-col  relative z-20">
+        <motion.div
+          initial={{ y: 100 }}
+          animate={{ y: 0 }}
+          transition={{ type: "spring", duration: 0.8, bounce: 0.5 }}
+          className="shadow-md border w-full bg-white rounded p-4 flex flex-col  relative z-20"
+        >
           {roomOwner ? (
             <div className="space-y-4">
               <p className="text-gray-400 uppercase text-xs text-center ">
@@ -36,7 +44,7 @@ const Lobby = () => {
                     Copy Code
                   </button>
                 </CopyToClipboard>
-                <CopyToClipboard text={`dominate.codes?code=${room}`}>
+                <CopyToClipboard text={`https://dominate.codes/game?code=${room}`}>
                   <button className="secondary-btn rounded w-full">
                     Copy URL
                   </button>
@@ -51,7 +59,7 @@ const Lobby = () => {
               </p>
               <div className="flex flex-col space-y-2">
                 {players &&
-                  players.map(({name}, i) => (
+                  players.map(({ name }, i) => (
                     <div key={name}>
                       <PlayerItem playerID={name} index={i} />
                     </div>
@@ -71,10 +79,11 @@ const Lobby = () => {
               </p>
               <div className="flex flex-col space-y-2">
                 {players &&
-                  players.map(({name}, i) => (
+                  players.map(({ name }, i) => (
                     <div key={name}>
                       <PlayerItem playerID={name} index={i} />
-                    </div>))}
+                    </div>
+                  ))}
               </div>
               <div className="primary-btn rounded w-full flex items-center justify-center space-x-2">
                 <svg
@@ -104,7 +113,7 @@ const Lobby = () => {
               </p>
             </div>
           )}
-        </div>
+        </motion.div>
       </div>
     </div>
   )

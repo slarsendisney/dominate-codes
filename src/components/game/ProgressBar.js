@@ -35,7 +35,7 @@ const ProgressBar = ({ primaryColor, lighterColor, player, progress, ranking }) 
   }
   return (
     <div
-      className="overflow-hidden h-5 mb-4 text-xs flex rounded w-full"
+      className="overflow-hidden h-5 text-xs flex rounded w-full"
       style={{ backgroundColor: lighterColor }}
     >
       <motion.div
