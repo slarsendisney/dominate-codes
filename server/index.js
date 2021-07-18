@@ -54,12 +54,12 @@ const server = express()
     const gamesPlayed = await roomsRef.get()
     const rooms = []
     const activeRooms = []
-    const activePlayers = 0
+    let activePlayers = 0
     gamesPlayed.forEach(doc => {
       const data = doc.data()
-      const {gameEnd,players} = data
+      const {gameStart, gameEnd,players} = data
       rooms.push(true)
-      if(!gameEnd){
+      if(!gameEnd && gameStart){
         activePlayers += players.length
         activeRooms.push(true)
       }

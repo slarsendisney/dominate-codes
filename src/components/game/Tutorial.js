@@ -7,7 +7,7 @@ const Tutorial = () => {
       <p>Dominate the board by answering questions and claiming territory before the time is up. </p>
       <div className="flex space-x-2 items-center">
         <div className="h-5 w-5 bg-indigo-600 rounded-full" />
-        <p><span className="font-bold">Events:</span> Click on these and answer question.</p>
+        <p><span className="font-bold">Events:</span> Click on these and answer a question.</p>
       </div>
       <div className="flex space-x-2 items-center">
         <div className="h-5 w-5 bg-gray-300 rounded-full" />
