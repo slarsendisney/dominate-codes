@@ -216,7 +216,7 @@ const GridItem = ({
           }}
         >
           {timedOut ? (
-            <p className="font-bold" style={{ fontSize: 14 }}>
+            <p className="font-bold cursor-not-allowed" style={{ fontSize: 14 }}>
               {timedOut}
             </p>
           ) : (
