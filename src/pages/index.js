@@ -26,9 +26,10 @@ const Index = () => {
 
   return (
     <>
-    <Header />
+    
     <SEO title="Home"/>
-    <div className="relative h-full md:py-0 lg:py-0">
+    <div className="relative h-full py-32 md:py-0 lg:py-0">
+    <Header />
       <div className="px-2  h-screen flex flex-col items-center justify-center text-gray-800 space-y-4 md:space-y-8 relative z-30">
         
         <img src={Logo} className="h-32" />
