@@ -25,6 +25,7 @@
         "framer-motion": "^4.1.17",
         "gatsby": "^3.9.0",
         "gatsby-plugin-firebase": "*",
+        "gatsby-plugin-manifest": "^3.9.0",
         "gatsby-plugin-postcss": "^4.9.0",
         "postcss": "^8.2.6",
         "react": "^17.0.1",

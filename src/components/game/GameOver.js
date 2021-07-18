@@ -50,8 +50,8 @@ const GameOver = () => {
             Only the room owner can start a rematch.
           </p>}
         </div>
-        <div className="mt-1 text-gray-400 text-center">
-          Like the game? Tweet us!
+        <div className="mt-2 text-gray-600 text-center">
+          Like the game? <a target="_blank" rel="noopener noreferrer" href={`https://twitter.com/intent/tweet?url=&text=I%20just%20played%20https%3A%2F%2Fdominate.codes%20by%20%40samlarsendisney%20%26%20%40yannispanagis%20%23dominatecodes`} className="text-indigo-600 hover:underline">Tweet us!</a>
         </div>
       </div>
     </div>
