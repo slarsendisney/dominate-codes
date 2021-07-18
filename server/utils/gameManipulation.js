@@ -43,24 +43,26 @@ async function joinRoom(roomId, name, socket, firebase, io) {
   try {
     const doc = await firebase.firestore().collection("rooms").doc(roomId).get()
     if (doc.exists) {
-      await firebase
-        .firestore()
-        .collection("rooms")
-        .doc(roomId)
-        .set(
-          {
-            players: firebase.firestore.FieldValue.arrayUnion({
-              name,
-              socket: socket.id,
-            }),
-          },
-          { merge: true }
-        )
-      socket.join(roomId)
-      socket.emit("join-room", {
-        room: roomId,
-      })
-      sendGameState(roomId, firebase, io)
+      if (doc.data().players.length < 12) {
+        await firebase
+          .firestore()
+          .collection("rooms")
+          .doc(roomId)
+          .set(
+            {
+              players: firebase.firestore.FieldValue.arrayUnion({
+                name,
+                socket: socket.id,
+              }),
+            },
+            { merge: true }
+          )
+        socket.join(roomId)
+        socket.emit("join-room", {
+          room: roomId,
+        })
+        sendGameState(roomId, firebase, io)
+      }
     }
   } catch (e) {
     console.log(e)

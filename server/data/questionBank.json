@@ -226,8 +226,8 @@
     "question": "Which one of the following is the correct way of adding Inline styles.",
     "tags": ["CSS", "Web Development"],
     "params": {
-      "options": ["<p style=“font-size:16px;”>Geeksforgeeks</p>", "<p inline style=“font-size:16px”>Geeksforgeeks</p>", "<p inline style=“font-size 16px”>Geeksforgeeks</p>", "<p style=“font-size 16px;”>Geeksforgeeks</p>"],
-      "answer": "<p style=“font-size:16px;”>Geeksforgeeks</p>"
+      "options": ["<p style=“font-size:16px;”>Dominate.Codes</p>", "<p inline style=“font-size:16px”>Dominate.Codes</p>", "<p inline style=“font-size 16px”>Dominate.Codes</p>", "<p style=“font-size 16px;”>Dominate.Codes</p>"],
+      "answer": "<p style=“font-size:16px;”>Dominate.Codes</p>"
     }
   },
   {
@@ -259,8 +259,8 @@
     "question": "How do we add a comment in CSS file?",
     "tags": ["CSS", "Web Development"],
     "params": {
-      "options": ["Geeksforgeeks", "/ Geeksforgeeks /", "/*Geeksforgeeks*/", "//*Geeksforgeek]s*//"],
-      "answer": "/*Geeksforgeeks*/"
+      "options": ["Dominate.Codes", "/ Dominate.Codes /", "/*Dominate.Codes*/", "//*Geeksforgeek]s*//"],
+      "answer": "/*Dominate.Codes*/"
     }
   },
   {
