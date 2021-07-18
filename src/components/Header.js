@@ -81,7 +81,7 @@ const Header = () => {
           <p className="text-xl font-bold ">
             View the {` `}
             <a
-              href="https://level-up-society-13094.devpost.com/project-gallery"
+              href="https://devpost.com/software/dominate-codes?ref_content=my-projects-tab&ref_feature=my_projects"
               className="hover:underline cursor-pointer text-indigo-600"
               target="_blank"
               rel="noopener noreferrer"
