@@ -20,7 +20,7 @@ async function roomSetup(roomId, name, category, map, socket, firebase) {
         occupied: {},
         gameStart: false,
         gameEnd: false,
-        counter: 30,
+        counter: 100,
         owner: socket.id,
         colors: intialColors,
         players: [{ socket: socket.id, name }],
