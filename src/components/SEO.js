@@ -13,7 +13,7 @@ function SEO({ description, lang = "enGB", meta, title = "Play" }) {
     },
   }
   const metaDescription = description || site.siteMetadata.description
-  let cardUrl = "https://ik.imagekit.io/sld/meta-preview-image_KXEYpYVErK.png"
+  let cardUrl = "https://dominate.codes/meta-preview-image.png"
   return (
     <Helmet
       htmlAttributes={{
