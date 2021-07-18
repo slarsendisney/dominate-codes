@@ -10,6 +10,9 @@ import GameOver from "./GameOver"
 import Rotate from "../../assets/rotate.svg"
 import Header from "../Header"
 
+import useSound from 'use-sound';
+import popSfx from '../../assets/sounds/pop.mp3';
+
 import HelpMenu from "../cards/HelpMenu"
 import QuestionMarkCircle from "../../assets/QuestionMarkCircle"
 
@@ -19,6 +22,7 @@ const Game = ({ code }) => {
   const [create, setCreate] = useState(false)
   const [createSubmitted, setCreateSubmitted] = useState(false)
   const [openHelpMenu, setOpenHelpMenu] = useState(false)
+  const [playPop] = useSound(popSfx);
 
   useEffect(() => {
     if (gameStart) {
@@ -79,9 +83,7 @@ const Game = ({ code }) => {
 
   if (!room) {
     return (
-      
-        <Join code={code} createTime={() => setCreate(true)} />
-
+      <Join code={code} createTime={() => setCreate(true)} />
     )
   }
 
@@ -121,7 +123,10 @@ const Game = ({ code }) => {
         
         <div className="absolute bottom-0 left-0 p-4">
           <div className="flex-initial">
-            <button onClick={() => { setOpenHelpMenu(!openHelpMenu) }}><QuestionMarkCircle className="w-8 h-8 text-indigo-400 hover:text-indigo-600"/></button>
+            <button onClick={() => { 
+              playPop()
+              setOpenHelpMenu(!openHelpMenu) 
+              }}><QuestionMarkCircle className="w-8 h-8 text-indigo-400 hover:text-indigo-600"/></button>
           </div>
         </div>
         {
