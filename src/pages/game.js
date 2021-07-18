@@ -8,7 +8,7 @@ const GamePage = ({ location }) => {
   const params = new URLSearchParams(location.search)
   const code = params.get("code")
   return (
-    <div className="flex flex-col items-center justify-center h-screen relative">
+    <div className="flex flex-col items-center justify-center h-full min-h-screen relative overflow-y-scroll pt-16 pb-32 md:py-0">
       <AuthProvider>
         <GameProvider>
           <TimeProvider>

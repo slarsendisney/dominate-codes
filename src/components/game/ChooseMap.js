@@ -11,7 +11,7 @@ const ChooseMap = ({submit}) => {
   return (
     <div className="">
     <Header/>
-    <div className="h-screen w-full pt-24 pb-32 px-6 md:px-24 overflow-y-scroll">
+    <div className="h-full w-full pt-8 md:pt-16 px-12 md:px-24">
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 text-left w-full">
       {Object.keys(MapData).map(category => {
         return (
