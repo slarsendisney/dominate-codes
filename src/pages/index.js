@@ -5,6 +5,7 @@ import Header from "../components/Header"
 import "../style/bubbles.css"
 import Logo from "../assets/logo.svg"
 import LevelUp from "../assets/LevelUp.svg"
+import SEO from "../components/SEO"
 
 const APIURL = process.env.GATSBY_LOCAL_SOCKET
   ? "http://localhost:3000/stats"
@@ -26,6 +27,7 @@ const Index = () => {
   return (
     <>
     <Header />
+    <SEO title="Home"/>
     <div className="relative h-full md:py-0 lg:py-0">
       <div className="px-2  h-screen flex flex-col items-center justify-center text-gray-800 space-y-4 md:space-y-8 relative z-30">
         

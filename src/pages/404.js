@@ -3,12 +3,14 @@ import * as React from "react"
 import "../style/bubbles.css"
 import Header from "../components/Header"
 import LevelUp from "../assets/LevelUp.svg"
+import SEO from "../components/SEO"
 
 import { Link } from "gatsby"
 
 const FourOhFour = () => {
   return (
     <div className="relative">
+      <SEO title="Oops!"/>
     <div className="py-8 md:py-24 lg:py-36 h-screen flex flex-col items-center justify-center text-gray-800 space-y-4 md:space-y-8 relative z-30">
       <Header />
       <h1 className="text-8xl text-center font-bold text-indigo-800">404 Page Not Found</h1>
