@@ -1,6 +1,12 @@
 import * as React from "react"
 
+import useSound from 'use-sound';
+import fanfareSfx from '../../assets/sounds/rising-pops.mp3';
+
 const VictoryCard = () => {
+  const [play] = useSound(fanfareSfx);
+
+  play()
   return (
     <div className="flex flex-col pb-2 text-center text-white">
       <svg

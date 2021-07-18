@@ -11,6 +11,9 @@ import left_boot from "../../assets/left_boot.svg"
 import short_horizontal_bar from "../../assets/short_horizontal_bar.svg"
 import short_vertical_bar from "../../assets/short_vertical_bar.svg"
 
+import useSound from 'use-sound';
+import biteSfx from '../../assets/sounds/bite.mp3';
+
 const circleSize = "h-4 w-4 md:h-6 md:w-6"
 
 const itemVariants = {
@@ -168,6 +171,10 @@ const Shape = ({ shape }) => {
   }
 }
 
+// const BoopButton = () => {
+//   return <button onClick={play}>Boop!</button>;
+// };
+
 const GridItem = ({
   event,
   activateEvent,
@@ -178,6 +185,7 @@ const GridItem = ({
   socketID,
   timedOut,
 }) => {
+  const [play] = useSound(biteSfx);
   const [active, setActive] = useState(false)
   return (
     <>
@@ -187,6 +195,7 @@ const GridItem = ({
           onHoverStart={() => {
             if (!timedOut) {
               setActive(true)
+              play()
               setEventPreview(event)
             }
           }}

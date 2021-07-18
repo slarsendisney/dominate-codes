@@ -1,6 +1,12 @@
 import * as React from "react"
 
+import useSound from 'use-sound';
+import plungeSfx from '../../assets/sounds/disable-sound.mp3';
+
 const DefeatCard = () => {
+  const [play] = useSound(plungeSfx);
+  play()
+
   return (
     <div className="flex flex-col pb-2 text-white">
       <svg

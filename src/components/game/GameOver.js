@@ -3,6 +3,13 @@ import { Link } from "gatsby"
 import { useGame } from "../../context/game-context"
 import FinalProgress from "./FinalProgress"
 
+// Sound Integration
+import useSound from 'use-sound';
+import dunDunDunSfx from '../../assets/sounds/dun-dun-dun.mp3';
+import fanfareSfx from '../../assets/sounds/fanfare.mp3';
+
+import { useAuth } from "../../context/auth-context"
+
 const GameOver = () => {
   const {
     startGame,
@@ -14,6 +21,17 @@ const GameOver = () => {
     resetGameState,
     winner
   } = useGame()
+
+  const { user } = useAuth() || {}
+
+  const [playWinnerSound] = useSound(dunDunDunSfx);
+  const [playLoserSound] = useSound(fanfareSfx);
+
+  if (winner === user) {
+    playWinnerSound()
+  } else {
+    playLoserSound()
+  }
 
   return (
     <div className="max-w-4xl h-full flex flex-col items-center justify-center ">

@@ -22,7 +22,7 @@ const QuestionContainer = ({ activeEvent, reset }) => {
   const [timeStart, setTimeStart] = useState()
   const [questionComponent, setQuestionComponent] = useState()
   const [state, setState] = useState("unanswered")
-
+  
   React.useLayoutEffect(() => {
     setQuestionComponent(<QuestionComponent />)
   }, [])
