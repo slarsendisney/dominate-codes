@@ -4,24 +4,19 @@ import FinalProgress from "./FinalProgress"
 import { m as motion } from "framer-motion"
 
 // Sound Integration
-import useSound from 'use-sound';
-import dunDunDunSfx from '../../assets/sounds/dun-dun-dun.mp3';
-import fanfareSfx from '../../assets/sounds/fanfare.mp3';
+import useSound from "use-sound"
+import dunDunDunSfx from "../../assets/sounds/dun-dun-dun.mp3"
+import fanfareSfx from "../../assets/sounds/fanfare.mp3"
 
 import { useAuth } from "../../context/auth-context"
 
 const GameOver = () => {
-  const {
-    startGame,
-    roomOwner,
-    resetGameState,
-    winner,
-  } = useGame()
+  const { startGame, roomOwner, resetGameState, winner } = useGame()
 
   const { user } = useAuth() || {}
 
-  const [playWinnerSound] = useSound(dunDunDunSfx);
-  const [playLoserSound] = useSound(fanfareSfx);
+  const [playWinnerSound] = useSound(dunDunDunSfx)
+  const [playLoserSound] = useSound(fanfareSfx)
 
   if (winner === user) {
     playWinnerSound()
@@ -71,6 +66,26 @@ const GameOver = () => {
             </p>
           )}
         </motion.div>
+        <div className="mt-2 text-gray-600 text-center">
+          This game was built by{" "}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={`https://sld.codes`}
+            className="text-indigo-600 hover:underline"
+          >
+            Sam Larsen-Disney
+          </a>{" "}
+          {`&`}{" "}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={`https://yannispanagis.com`}
+            className="text-indigo-600 hover:underline"
+          >
+            Yannis Panagis
+          </a>
+        </div>
         <div className="mt-2 text-gray-600 text-center">
           Like the game?{" "}
           <a
