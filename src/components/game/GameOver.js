@@ -39,8 +39,8 @@ const GameOver = () => {
             </p>
             <p className="text-2xl text-center font-bold">{winner} wins!</p>
           </div>
-          <div className="w-80">
-            <h4>Summary:</h4>
+          <div className="flex flex-col items-center justify-center w-full">
+            <h4 className="text-center">Summary:</h4>
             <FinalProgress />
           </div>
           <div className="grid grid-cols-2 gap-2">

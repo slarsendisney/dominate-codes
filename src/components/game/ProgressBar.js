@@ -13,7 +13,7 @@ function round(num, decimalPlaces = 2) {
   num = Math.round(num + "e" + decimalPlaces)
   return Number(num + "e" + -decimalPlaces)
 }
-const ProgressBar = ({ primaryColor, lighterColor, player, progress, ranking }) => {
+const ProgressBar = ({ primaryColor, lighterColor, player, progress, ranking, }) => {
   const transition = {
     duration: 0.5,
     type: "spring",

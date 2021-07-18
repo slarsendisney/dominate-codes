@@ -61,8 +61,8 @@ const GameProgress = () => {
 
   return (
     <div className="w-full">
-      <div className="w-64 mt-4 mr-4">
-        <div className="align-right flex flex-col space-y-1 items-center">
+      <div className="mt-4 mr-4 mx-auto">
+        <div className="align-right flex flex-col space-y-1 items-center justify-center">
           {playersWithColors.map((player, i) => (
             <ProgressBar
               primaryColor={player.primary}

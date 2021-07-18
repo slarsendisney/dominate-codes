@@ -214,51 +214,67 @@ async function endGame(roomId, players, firebase, io) {
   const winningOrder = Object.keys(playerProgress).sort(
     (a, b) => playerProgress[b].count - playerProgress[a].count
   )
-  const [winner, ...rest] = winningOrder
-  try {
-    await firebase.firestore().collection("rooms").doc(roomId).set(
-      {
-        gameEnd: true,
-        winner: playerProgress[winner].name,
-      },
-      { merge: true }
-    )
-  } catch (e) {
-    console.log(e)
-  }
-
-  sendGameState(roomId, firebase, io)
-  try {
-    await firebase
-      .firestore()
-      .collection("leaderboard")
-      .doc(playerProgress[winner].name)
-      .set(
+  if (winningOrder.length !== 0) {
+    const [winner, ...rest] = winningOrder
+    try {
+      await firebase.firestore().collection("rooms").doc(roomId).set(
         {
-          user: playerProgress[winner].name,
-          score: firebase.firestore.FieldValue.increment(500),
+          gameEnd: true,
+          winner: playerProgress[winner].name,
         },
         { merge: true }
       )
-  } catch (e) {
-    console.log(e)
-  }
-  for (user in rest) {
+    } catch (e) {
+      console.log(e)
+    }
+
+    sendGameState(roomId, firebase, io)
     try {
       await firebase
         .firestore()
         .collection("leaderboard")
-        .doc(playerProgress[user].name)
+        .doc(playerProgress[winner].name)
         .set(
           {
-            user: playerProgress[user].name,
-            score: firebase.firestore.FieldValue.increment(200),
+            user: playerProgress[winner].name,
+            score: firebase.firestore.FieldValue.increment(500),
           },
           { merge: true }
         )
     } catch (e) {
       console.log(e)
     }
+    for (user in rest) {
+      try {
+        await firebase
+          .firestore()
+          .collection("leaderboard")
+          .doc(playerProgress[user].name)
+          .set(
+            {
+              user: playerProgress[user].name,
+              score: firebase.firestore.FieldValue.increment(200),
+            },
+            { merge: true }
+          )
+      } catch (e) {
+        console.log(e)
+      }
+    }
+  } else {
+    try {
+      await firebase.firestore().collection("rooms").doc(roomId).set(
+        {
+          gameEnd: true,
+          winner: players[0].name,
+        },
+        { merge: true }
+      )
+    } catch (e) {
+      console.log(e)
+    }
+
+    sendGameState(roomId, firebase, io)
   }
 }
 
