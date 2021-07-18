@@ -3,9 +3,20 @@ const questions = require("../data/questionBank.json")
 
 const maps = require("../map-data.json")
 const intialColors = [
-  { primary: "#F59E0B", lighter: "#FEF3C7", light: "#FBBF24", dark: "#D97706" },
-  { primary: "#10B981", lighter: "#D1FAE5", light: "#34D399", dark: "#059669" },
-  { primary: "#EC4899", lighter: "#DBEAFE", light: "#F472B6", dark: "#DB2777" },
+  // 500, 100, 300, 600
+  { primary: "#F59E0B", lighter: "#FDE68A", light: "#FBBF24", dark: "#B45309" }, // Amber
+  { primary: "#3B82F6", lighter: "#BFDBFE", light: "#60A5FA", dark: "#1E40AF" }, // blue
+  { primary: "#84CC16", lighter: "#D9F99D", light: "#A3E635", dark: "#4D7C0F" }, // lime
+  { primary: "#EC4899", lighter: "#DBEAFE", light: "#F472B6", dark: "#DB2777" }, // pink
+  { primary: "#D946EF", lighter: "#F5D0FE", light: "#E879F9", dark: "#A21CAF" }, // Fuchsia
+  { primary: "#0EA5E9", lighter: "#BAE6FD", light: "#38BDF8", dark: "#075985" }, // Sky
+  { primary: "#06B6D4", lighter: "#A5F3FC", light: "#22D3EE", dark: "#155E75" }, // Cyan
+  { primary: "#14B8A6", lighter: "#99F6E4", light: "#2DD4BF", dark: "#0F766E" }, // Teal
+  { primary: "#EAB308", lighter: "#FEF08A", light: "#FACC15", dark: "#A16207" }, // Yellow
+  { primary: "#F97316", lighter: "#FED7AA", light: "#FB923C", dark: "#C2410C" }, // Orange
+  { primary: "#EF4444", lighter: "#FECACA", light: "#F87171", dark: "#B91C1C" }, // Red
+  { primary: "#A855F7", lighter: "#E9D5FF", light: "#C084FC", dark: "#6B21A8" }, // Purple
+
 ]
 
 async function roomSetup(roomId, name, category, map, socket, firebase) {
