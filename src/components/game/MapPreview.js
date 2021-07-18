@@ -15,7 +15,7 @@ const MapPreview = ({ dimensions: {width, height}, omissions }) => {
                 {omissions?.[x]?.[y] ? (
                   <div style={circleStyles} />
                 ) : (
-                  <div style={circleStyles} className={`bg-gray-600`} />
+                  <div style={circleStyles} className={`bg-white`} />
                 )}
               </>
             ))}

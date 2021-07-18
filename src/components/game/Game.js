@@ -8,6 +8,7 @@ import ChooseMap from "./ChooseMap"
 import QuestionContainer from "./QuestionContainer"
 import GameOver from "./GameOver"
 import Rotate from "../../assets/rotate.svg"
+import Header from "../Header"
 
 const Game = ({ code }) => {
   const { room, gameStart, gameState, gameEnd, disconnected } = useGame()
@@ -84,7 +85,7 @@ const Game = ({ code }) => {
   }
 
   if (gameEnd) {
-    return <GameOver />
+    return <><Header/><GameOver /></>
   }
 
   return (
