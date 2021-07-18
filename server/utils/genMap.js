@@ -26,6 +26,7 @@ Object.defineProperty(Array.prototype, "chunk_inefficient", {
 })
 
 async function getMeAnImageArray(resolution = 25, imgLink) {
+  console.log(imgLink)
   const imageData = fs.readFileSync(imgLink)
   const { width, height } = await sharp(imageData).metadata()
   let pixelWidth = Math.floor((width / height) * resolution)
@@ -98,11 +99,15 @@ async function main() {
       const category = name
       const mapsInside = {}
       for (const child of children) {
-        const { path, name, extension } = child
-        const mapName = name.replace(extension, "")
-        const mapInfo = await getMeAnImageArray(25, path)
-        mapsInside[mapName] = mapInfo
-        console.log(mapName)
+        try{
+          const { path, name, extension } = child
+          const mapName = name.replace(extension, "")
+          const mapInfo = await getMeAnImageArray(25, path)
+          mapsInside[mapName] = mapInfo
+        }catch(e){
+          console.log(e)
+        }
+        
       }
       maps[category] = { ...mapsInside }
     }
