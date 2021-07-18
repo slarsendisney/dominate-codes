@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { useGame } from "../../context/game-context"
 import { CopyToClipboard } from "react-copy-to-clipboard"
 import { m as motion } from "framer-motion"
+import Header from "../Header"
 
 const Lobby = () => {
   const { startGame, roomOwner, room, players, socketID, owner } = useGame()
@@ -21,6 +22,7 @@ const Lobby = () => {
   )
   return (
     <div className="max-w-4xl h-full flex flex-col items-center justify-center ">
+      <Header />
       <div className="relative ">
         <motion.div
           initial={{ y: 100 }}
@@ -42,7 +44,7 @@ const Lobby = () => {
                     Copy Code
                   </button>
                 </CopyToClipboard>
-                <CopyToClipboard text={`dominate.codes/game?code=${room}`}>
+                <CopyToClipboard text={`https://dominate.codes/game?code=${room}`}>
                   <button className="secondary-btn rounded w-full">
                     Copy URL
                   </button>
