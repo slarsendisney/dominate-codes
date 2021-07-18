@@ -64,7 +64,7 @@ async function joinRoom(roomId, name, socket, firebase, io) {
   }
 }
 
-function calcInclusions(dimensions, omissions){
+function calcInclusions(dimensions, omissions) {
   const inclusions = []
   for (var i = 0; i < dimensions.width; i++) {
     for (var j = 0; j < dimensions.height; j++) {
@@ -127,7 +127,7 @@ function checkPlayersPresent(roomId, players, io) {
   const inRoom = io.sockets.adapter.rooms.get(roomId)
   let flag = true
   if (inRoom && players) {
-    players.forEach(({socket}) => {
+    players.forEach(({ socket }) => {
       if (!inRoom.has(socket)) {
         flag = false
       }
@@ -188,50 +188,72 @@ async function endGame(roomId, players, firebase, io) {
     .collection("rooms")
     .doc(roomId)
     .get()
-  
+
   const { occupied, dimensions } = document.data()
   const playerProgress = Object.keys(occupied).reduce((acc, x) => {
     Object.keys(occupied[x]).map(y => {
       const user = occupied[x][y]
       if (acc[user]) {
         acc[user].count += 1
-      }
-      else {
+      } else {
         acc[user] = {
-          count: 1
+          count: 1,
+        }
       }
-    }
     })
     return acc
   }, {})
   Object.keys(playerProgress).map(key => {
-    playerProgress[key].name = players.find(({socket}) => socket === key).name
+    playerProgress[key].name = players.find(({ socket }) => socket === key).name
   })
-  const winningOrder = Object.keys(playerProgress).sort((a,b) => playerProgress[b].count - playerProgress[a].count)
+  const winningOrder = Object.keys(playerProgress).sort(
+    (a, b) => playerProgress[b].count - playerProgress[a].count
+  )
   const [winner, ...rest] = winningOrder
-  await firebase.firestore().collection("rooms").doc(roomId).set(
-    {
-      gameEnd: true,
-      winner: playerProgress[winner].name,
-    },
-    { merge: true }
-  )
-  sendGameState(roomId, firebase, io)
-  await firebase.firestore().collection("leaderboard").doc(playerProgress[winner].name).set(
-    {
-      user: playerProgress[winner].name,
-      score: firebase.firestore.FieldValue.increment(500)
-    },
-    { merge: true }
-  )
-  for (user in rest){
-    await firebase.firestore().collection("leaderboard").doc(playerProgress[user].name).set(
+  try {
+    await firebase.firestore().collection("rooms").doc(roomId).set(
       {
-        user: playerProgress[user].name,
-        score: firebase.firestore.FieldValue.increment(200)
+        gameEnd: true,
+        winner: playerProgress[winner].name,
       },
       { merge: true }
     )
+  } catch (e) {
+    console.log(e)
+  }
+
+  sendGameState(roomId, firebase, io)
+  try {
+    await firebase
+      .firestore()
+      .collection("leaderboard")
+      .doc(playerProgress[winner].name)
+      .set(
+        {
+          user: playerProgress[winner].name,
+          score: firebase.firestore.FieldValue.increment(500),
+        },
+        { merge: true }
+      )
+  } catch (e) {
+    console.log(e)
+  }
+  for (user in rest) {
+    try {
+      await firebase
+        .firestore()
+        .collection("leaderboard")
+        .doc(playerProgress[user].name)
+        .set(
+          {
+            user: playerProgress[user].name,
+            score: firebase.firestore.FieldValue.increment(200),
+          },
+          { merge: true }
+        )
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
 
@@ -257,13 +279,17 @@ async function gameLoop(
 
       let rnd = Math.random()
       if (rnd < 0.5 && typeof inclusions !== "undefined") {
-        generateEvent(
-          roomId,
-          getRandomCoordinates(dimensions, inclusions),
-          firebase,
-          io
-        )
-        sendGameState(roomId, firebase, io)
+        try {
+          generateEvent(
+            roomId,
+            getRandomCoordinates(dimensions, inclusions),
+            firebase,
+            io
+          )
+          sendGameState(roomId, firebase, io)
+        } catch (e) {
+          console.log(e)
+        }
       }
 
       if (countdown === 0) {

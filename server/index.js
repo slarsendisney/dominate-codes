@@ -24,7 +24,7 @@ var whitelist = [
   "https://dominate-fe.onrender.com",
   "http://dominate-fe.onrender.com",
   "http://dominate.codes",
-  "https://dominate.codes"
+  "https://dominate.codes",
 ]
 var corsOptions = {
   origin: function (origin, callback) {
@@ -35,17 +35,41 @@ var corsOptions = {
 
 const server = express()
   .use(cors(corsOptions))
-    // .use(bodyParser.json())
-    .use(express.urlencoded({ extended: true }))
-    .get("/leaderboard", cors(corsOptions), async function (req, res) {
-      const leaderboardRef = db.collection('leaderboard');
-      const snapshot = await leaderboardRef.orderBy('score', 'desc').limit(100).get();
-      const leaderboard = []
-      snapshot.forEach(doc => {
-        leaderboard.push(doc.data())
-      });
-      res.send(leaderboard)
+  // .use(bodyParser.json())
+  .use(express.urlencoded({ extended: true }))
+  .get("/leaderboard", cors(corsOptions), async function (req, res) {
+    const leaderboardRef = db.collection("leaderboard")
+    const snapshot = await leaderboardRef
+      .orderBy("score", "desc")
+      .limit(100)
+      .get()
+    const leaderboard = []
+    snapshot.forEach(doc => {
+      leaderboard.push(doc.data())
     })
+    res.send(leaderboard)
+  })
+  .get("/stats", cors(corsOptions), async function (req, res) {
+    const roomsRef = db.collection("rooms")
+    const gamesPlayed = await roomsRef.get()
+    const rooms = []
+    const activeRooms = []
+    const activePlayers = 0
+    gamesPlayed.forEach(doc => {
+      const data = doc.data()
+      const {gameEnd,players} = data
+      rooms.push(true)
+      if(!gameEnd){
+        activePlayers += players.length
+        activeRooms.push(true)
+      }
+    })
+    res.send({
+      activeRooms: activeRooms.length,
+      gamesPlayed: rooms.length,
+      online: activePlayers,
+    })
+  })
   .listen(PORT, () => console.log(`Listening on ${PORT}`))
 
 const io = require("socket.io")(server, {

@@ -1,7 +1,7 @@
 import React, { useState } from "react"
-import { Link } from "gatsby"
 import { useGame } from "../../context/game-context"
 import FinalProgress from "./FinalProgress"
+import { m as motion } from "framer-motion"
 
 // Sound Integration
 import useSound from 'use-sound';
@@ -14,12 +14,8 @@ const GameOver = () => {
   const {
     startGame,
     roomOwner,
-    room,
-    players,
-    socketID,
-    owner,
     resetGameState,
-    winner
+    winner,
   } = useGame()
 
   const { user } = useAuth() || {}
@@ -36,7 +32,12 @@ const GameOver = () => {
   return (
     <div className="max-w-4xl h-full flex flex-col items-center justify-center ">
       <div className="relative ">
-        <div className="shadow-md border w-full bg-white rounded p-4 flex flex-col relative space-y-4 z-20">
+        <motion.div
+          initial={{ y: 100 }}
+          animate={{ y: 0 }}
+          transition={{ type: "spring", duration: 0.8, bounce: 0.5 }}
+          className="shadow-md border w-full bg-white rounded p-4 flex flex-col relative space-y-4 z-20"
+        >
           <div>
             <p className="text-sm text-center uppercase text-gray-400">
               Time's Up!
@@ -64,12 +65,22 @@ const GameOver = () => {
               Rematch
             </button>
           </div>
-          {!roomOwner && <p className="text-xs text-gray-400 max-w-lg">
-            Only the room owner can start a rematch.
-          </p>}
-        </div>
-        <div className="mt-1 text-gray-400 text-center">
-          Like the game? Tweet us!
+          {!roomOwner && (
+            <p className="text-xs text-gray-400 max-w-lg">
+              Only the room owner can start a rematch.
+            </p>
+          )}
+        </motion.div>
+        <div className="mt-2 text-gray-600 text-center">
+          Like the game?{" "}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={`https://twitter.com/intent/tweet?url=&text=I%20just%20played%20https%3A%2F%2Fdominate.codes%20by%20%40samlarsendisney%20%26%20%40yannispanagis%20%23dominatecodes`}
+            className="text-indigo-600 hover:underline"
+          >
+            Tweet us!
+          </a>
         </div>
       </div>
     </div>
