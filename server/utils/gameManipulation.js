@@ -16,7 +16,6 @@ const intialColors = [
   { primary: "#F97316", lighter: "#FED7AA", light: "#FB923C", dark: "#C2410C" }, // Orange
   { primary: "#EF4444", lighter: "#FECACA", light: "#F87171", dark: "#B91C1C" }, // Red
   { primary: "#A855F7", lighter: "#E9D5FF", light: "#C084FC", dark: "#6B21A8" }, // Purple
-
 ]
 
 async function roomSetup(roomId, name, category, map, socket, firebase) {

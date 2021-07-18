@@ -10,11 +10,15 @@ import GameOver from "./GameOver"
 import Rotate from "../../assets/rotate.svg"
 import Header from "../Header"
 
+import HelpMenu from "../cards/HelpMenu"
+import QuestionMarkCircle from "../../assets/QuestionMarkCircle"
+
 const Game = ({ code }) => {
   const { room, gameStart, gameState, gameEnd, disconnected } = useGame()
   const [event, setEvent] = useState(false)
   const [create, setCreate] = useState(false)
   const [createSubmitted, setCreateSubmitted] = useState(false)
+  const [openHelpMenu, setOpenHelpMenu] = useState(false)
 
   useEffect(() => {
     if (gameStart) {
@@ -114,6 +118,18 @@ const Game = ({ code }) => {
         {/* <div className="absolute bottom-0 left-0 h-48 bg-gray-100 rounded m-2 p-2 overflow-y-scroll">
         {JSON.stringify(gameState.events, null, "\t")}
       </div> */}
+        
+        <div className="absolute bottom-0 left-0 p-4">
+          <div className="flex-initial">
+            <button onClick={() => { setOpenHelpMenu(!openHelpMenu) }}><QuestionMarkCircle className="w-8 h-8 text-indigo-400 hover:text-indigo-600"/></button>
+          </div>
+        </div>
+        {
+          openHelpMenu && <HelpMenu 
+            closeFunc={setOpenHelpMenu}
+          />
+        }
+
         {disconnected && (
           <div className="absolute bottom-0 right-0 m-4">
             <div className="flex items-center space-x-2 p-2 bg-red-400 text-white rounded-md animate-pulse">
